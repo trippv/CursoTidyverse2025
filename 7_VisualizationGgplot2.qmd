@@ -40,10 +40,10 @@ En la sección anterior ya habíamos mencionado como el formato de los *geoms* n
 library(tidyverse)
 
 
-penguis <- read_csv("data/palmer_penguins.csv") |> 
+penguins <- read_csv("data/palmer_penguins.csv") |> 
   na.omit()
 
-pp <- ggplot(data = penguis, aes(x = bill_length_mm, y = body_mass_g))+
+pp <- ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+
   theme_bw()
 
 # color
@@ -83,7 +83,7 @@ pp +
        size = "Especie")
 
 # relleno
-ggplot(penguis, aes(x = bill_length_mm, fill = species))+
+ggplot(penguins, aes(x = bill_length_mm, fill = species))+
   geom_density(alpha = 0.4)+
   theme_bw()+
   labs(title = "Relleno",
@@ -106,9 +106,19 @@ CO2 |>
 
 ```
 
-# Ajuste manual de color
+# Colores
 
-## Ajuste manual global
+Existen tres casos de uso fundamentales para el color en las visualizaciones de datos:
+
+-   Podemos usar el color para distinguir grupos de datos entre sí
+
+-   Podemos usar el color para representar valores de datos
+
+-   Podemos usar el color para resaltar.
+
+Los tipos de colores que usamos y su forma de usarlos difieren bastante en estos tres casos.
+
+## Ajuste global
 
 Dentro de los aes podemos asignar un color diferente a cada grupo, pero también es posible asignar un color arbitrario a todas los geoms. Para esto, tenemos que establecer el color **afuera del *aes()***.
 
@@ -161,24 +171,26 @@ ggpubr::show_point_shapes()+
 > Nota que los puntos del 21 al 25 son simbolos abiertos por lo que pueden ser rellenados por un color (*fill*).
 :::
 
-## Ajuste manual por grupo
+## Ajuste manual para valores discretos
 
 En ejemplos anteriores, donde usamos el argumento `color` dentro de los `aes()` ggplot2 asigna una paleta de colores default. Si queremos asignar colores específicos, podemos añadirlos manualmente usando las funciones:
 
 -   `scale_color_manual()`
 -   `scale_fill_manual()`
+-   `scale_shape_manual()`
+
+En este caso, utilizamos distintos colores para distinguir los grupos, de manera que se usa una escala de color _cualitativa_. Esta escala de color contiene un número finito de colores que son seleccionados para que se puedan disntiguir uno de otro y que sean equivalentes uno de otro. 
 
 ```{r}
-pp <- ggplot(penguins)+
+base <- ggplot(penguins)+
   geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species))
 
 # ajustamos el color con scale_color_manual()
-pp +
+base +
   scale_color_manual(values = c("grey55", "orange", "lightblue"))
 
 ```
 
-:::: column-margin
 ::: callout-tip
 Dado que se requiere un vector con los colores que se deseen utilizar, es posible hacer un objeto con un vector de colores y utilizarlo de forma recurrente en distintas figuras. Por ejemplo
 
@@ -189,29 +201,43 @@ Dado que se requiere un vector con los colores que se deseen utilizar, es posibl
 colores <- c("grey55", "orange", "lightblue")
 
 # incluir el vector dentra de la función
-pp +
+base +
   scale_color_manual(values = colores)
 ```
 :::
-::::
 
-## Ajuste manual de gradientes
+## Ajuste manual para gradientes
 
-También es posible hacer ajuste manual de gradientes de color utilizando la función `scale_color_gradient()`
+También podemos utilizar una escala de colores secuencial. Dicha escala contiene una secuencia de colores que indica claramente:
 
-Por ejemplo, podemos gráficar la relación entre la longitud del pico y el peso corporal, con un gradiente de color por el peso corporal
+  1.  Qué valores son mayores o menores que otros, y
+  2.  Qué tan distantes están entre sí dos valores específicos.
+
+El segundo punto implica que la escala de colores debe percibirse como una variación uniforme a lo largo de todo su rango.
+
+Las escalas secuenciales pueden basarse en un solo tono (por ejemplo, de azul oscuro a azul claro) o en múltiples tonos (por ejemplo, de rojo oscuro a amarillo claro). Las escalas de varios tonos suelen seguir gradientes de color que se observan en la naturaleza, como de rojo oscuro, verde o azul a amarillo claro, o de púrpura oscuro a verde claro. 
+
+El ajuste manual de gradientes de color se realiza utilizando la función `scale_color_gradient()`
+
+Por ejemplo, podemos graficar la relación entre la longitud del pico y el peso corporal, con un gradiente de color por el peso corporal
 
 ```{r}
-pp2 <- ggplot(penguins)+
+base2 <- ggplot(penguins)+
   geom_point(aes(x = bill_length_mm, y = body_mass_g, 
                  color = body_mass_g))
-pp2
+base2
 
 # ajustar manualmente el gradiente
-pp2 +
+base2 +
   scale_color_gradient(low = "blue", high = "red")
 
 ```
+
+
+:::: {.callout-caution icon="true"}
+Observa que la principal diferencia entre usar `scale_color_manual()` y `scale_color_gradient()` es que el primero asigna un color a cada grupo, es decir, tiene que ser un factor o carácter, mientras que el segundo asigna un color a cada valor de una variable continua.
+::::
+
 
 ## Seleccionar una nueva paleta de colores
 
@@ -253,11 +279,11 @@ paleta_brewer <- brewer.pal(name = "Dark2", n = 3)
 paleta_virids <- viridis(n = 3)
 
 # usar paleta de RColorBrewer
-pp +
+base +
   scale_color_manual(values = paleta_brewer)
 
 # Usar paletta de Viridis
-pp + 
+base + 
   scale_color_manual(values = paleta_virids)
 ```
 
@@ -265,11 +291,11 @@ pp +
 
 ```{r}
 # usar RColorBrewer
-pp +
+base +
   scale_color_brewer(palette = "Dark2")
 
 # usar Viridis
-pp +
+base +
   scale_color_viridis(discrete = TRUE,option = "viridis")
 
 ```
@@ -277,11 +303,11 @@ pp +
 Para gradientes
 
 ```{r}
-pp2 +
+base2 +
   scale_color_distiller(palette = 5)
 
 
-pp2 +
+base2 +
   scale_colour_viridis_c(option = "magma")
 ```
 
@@ -448,7 +474,11 @@ ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+
   facet_wrap(~island) 
 
 
-
+# alternativo
+#ggplot()+
+#  geom_point(data = penguins_noisland, aes(x = bill_length_mm, y = body_mass_g), color = "grey75", alpha = 0.4)+
+#  geom_point(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = #island))+
+#  facet_wrap(~island)
 ```
 
 -   *Tip1*: Tienes que utilizar dos `geom_points()`; una con la base de datos original y una transformada.
@@ -483,27 +513,27 @@ Algunas de las opciones son las siguientes:
 #| layout-ncol: 2
 
 
-pp +
+base +
   theme_grey()+
   labs(title = "theme_grey")
 
-pp + 
+base + 
   theme_classic()+
   labs(title = "theme_classic()")
 
-pp +
+base +
   theme_bw()+
   labs(title = "theme_bw()")
 
-pp + 
+base + 
   theme_light()+
   labs(title = "theme_light")
 
-pp +
+base +
   theme_minimal()+
   labs(title = "theme_minimal()")
 
-pp + 
+base + 
   theme_void()+
   labs(title = "theme_void")
 

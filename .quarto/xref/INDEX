@@ -106,5 +106,8 @@
   },
   "slides/ggplot.qmd": {
     "ggplot.html": "fda3d3e2"
+  },
+  "slides/ggplot_edicion.qmd": {
+    "ggplot_edicion.html": "f3a759b1"
   }
 }

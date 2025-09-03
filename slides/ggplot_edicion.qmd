@@ -1,0 +1,157 @@
+---
+title: "ggplot2 pt II: Edición"
+author: "Miguel A. Tripp Valdez"
+institute: CIBNOR
+format: 
+  revealjs:
+    theme: default
+    width: 1200
+    slide-number: c/t
+    transition: fade
+    toc: false
+    logo: "img/logo.png"
+    echo: true
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2025/)"
+    css: styles/custom.scss
+title-slide-attributes: 
+  data-background-image: img/tidyverse_cover.png
+  data-background-size: cover
+  data-background-opacity: "0.4"
+---
+
+## 
+
+::: callout-objetivos
+### 🎓Objetivos
+
+Al final de esta lección serás capaz de:
+
+-   Modificar aspectos visuales como color, forma, transparencia, etc.
+-   Generar paneles para dividir subconjuntos de datos.
+-   Modificar el tema general de una gráfica.
+-   Modificar etiquetas y leyendas.
+-   Exportar una gráfica en distintos formatos.
+:::
+
+## Aesthetics:
+
+```{r aes_demo}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: fig-aes 
+#| fig-cap: "Los Aesthetics nos permiten representar diferentes variables en un solo gráfico"
+#| fig-subcap: 
+#|   - "Color"
+#|   - "Forma"
+#|   - "Transparencia"
+#|   - "Tamaño"
+#|   - "Relleno"
+#|   - "Agrupamiento"
+#| layout-ncol: 3
+
+
+library(tidyverse)
+library(here)
+
+penguins <- read_csv(here("data/palmer_penguins.csv")) |> 
+  na.omit()
+
+pp <- ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+
+  theme_bw()
+
+# color
+pp + 
+  geom_point(aes(color = species)) +
+  labs(title = "Color", 
+       subtitle = "color = species",
+       x = "Longitud del pico (mm)",
+       y = "Masa corporal (g)",
+       color = "Especie")
+
+# shape
+pp + 
+  geom_point(aes(shape = species)) +
+  labs(title = "Forma", 
+       subtitle = "shape = species",
+       x = "Longitud del pico (mm)",
+       y = "Masa corporal (g)",
+       shape = "Especie")
+
+# transparencia
+pp + 
+  geom_point(aes(alpha = body_mass_g)) +
+  labs(title = "Transarencia", 
+       subtitle = "alpha = body_mass_g",
+       x = "Longitud del pico (mm)",
+       y = "Masa corporal (g)",
+       alpha = "Especie")
+
+# tamaño
+pp + 
+  geom_point(aes(size = body_mass_g)) +
+  labs(title = "Tamaño", 
+       subtitle = "size = body_mass_g",
+       x = "Longitud del pico (mm)",
+       y = "Masa corporal (g)",
+       size = "Especie")
+
+# relleno
+ggplot(penguins, aes(x = bill_length_mm, fill = species))+
+  geom_density(alpha = 0.4)+
+  theme_bw()+
+  labs(title = "Relleno",
+       subtitle = "fill = species",
+       x = "Longitud del pico (mm)",
+       y = "Densidad",
+       fill = "Especie")
+
+# grouping
+CO2 |> 
+  ggplot(aes(x = conc, y = uptake, group = Plant, color = Type))+
+  geom_line()+
+  geom_point()+
+  theme_bw()+
+  labs(title = "Agrupamiento",
+       subtitle = "group = Plant",
+       x = "Concentración de CO2 (mL/L)",
+       y = "Absorción de CO2 mmol/m2 s)",
+       color = "Tipo")
+
+```
+
+## Ajustes manuales
+
+```{r}
+#| message: false
+#| warning: false
+#| code-line-numbers: "|1,|2,|3"
+#| 
+ggplot(data = penguins)+
+  geom_point(aes(x = bill_length_mm, y = body_mass_g), 
+             color = "darkblue")
+
+
+```
+
+## Ajustes manuales
+
+```{r}
+#| message: false
+#| warning: false
+
+ggplot(data = penguins)+
+  geom_point(aes(x = bill_length_mm, y = body_mass_g), 
+             color = "darkblue",
+             shape = 15)
+
+
+```
+
+## Ajuste manual por grupo
+
+En ejemplos anteriores, donde usamos el argumento `color` dentro de los `aes()` ggplot2 asigna una paleta de colores default. Si queremos asignar colores específicos, podemos añadirlos manualmente usando las funciones:
+
+-   `scale_color_manual()`
+-   `scale_fill_manual()`
+-   `scale_shape_manual()`

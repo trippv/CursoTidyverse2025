@@ -412,7 +412,6 @@ penguins %>%
 :::
 :::::
 
-
 ## Los amigos no permiten que sus amigos hagan gráficas de barras
 
 ```{r}
@@ -452,4 +451,3 @@ demo %>%
   geom_boxplot()+
   geom_point(position = position_jitterdodge(0.2))
 ```
-
