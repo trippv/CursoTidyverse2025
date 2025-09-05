@@ -155,3 +155,76 @@ En ejemplos anteriores, donde usamos el argumento `color` dentro de los `aes()` 
 -   `scale_color_manual()`
 -   `scale_fill_manual()`
 -   `scale_shape_manual()`
+
+## Paletas de colores
+
+::::: columns
+::: {.column .medium width="30%"}
+-   **RColorBrewer:** Paleta de colores categorizadas en secuenciales, divergentes y cualitativas diseñadas para ser amigables para personas con daltonismo asi como para ser impresa en escala de grises.
+:::
+
+::: {.column width="70%"}
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 9
+library(RColorBrewer)
+
+display.brewer.all(n = NULL, type = "all", select = NULL, exact.n = TRUE)
+```
+:::
+:::::
+
+## Paletas de colores
+
+::: columns
+::: {.column .medium width="30%"}
+-   **viridis**: Paleta de colores secuenciales diseñada para ser perceptualmente uniforme en escala de grises y amigable para personas con daltonismo.
+:::
+
+::: {.column width="70%"}
+![](img/viridis_col_pal.png)
+:::
+:::
+
+
+-----------------------------------------------------------
+
+```{r}
+#| echo: false
+library(ggplot2)
+library(viridis)
+
+# Example data
+set.seed(123)
+df <- data.frame(
+  x = rnorm(100),
+  y = rnorm(100),
+  cont = rnorm(100, mean = 20, sd = 5),     # continuous variable
+  disc = sample(letters[1:4], 100, replace = TRUE)  # discrete variable
+)
+
+# Continuous, smooth gradient
+p1 <- ggplot(df, aes(x, y, color = cont)) +
+  geom_point(size = 3) +
+  scale_color_viridis_c() +
+  ggtitle("scale_color_viridis_c() (continuous)")
+
+# Continuous, binned into categories
+p2 <- ggplot(df, aes(x, y, color = cont)) +
+  geom_point(size = 3) +
+  scale_color_viridis_b() +
+  ggtitle("scale_color_viridis_b() (binned)")
+
+# Discrete / categorical
+p3 <- ggplot(df, aes(x, y, color = disc)) +
+  geom_point(size = 3) +
+  scale_color_viridis_d() +
+  ggtitle("scale_color_viridis_d() (discrete)")
+
+# Display side by side
+library(patchwork)
+p1 / p2 / p3
+
+```
+

@@ -19,6 +19,7 @@ website:
           - 5_DataWrangling.qmd
           - 6_VisualizationGgplot.qmd
           - 7_VisualizationGgplot2.qmd
+          - 7_2_combinar.qmd
           - 8_ggplotNoCode.qmd
           - 9_Union.qmd
           - 10_Across.qmd

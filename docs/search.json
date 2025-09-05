@@ -130,7 +130,7 @@
     "href": "7_VisualizationGgplot2.html#ajustar-las-escalas",
     "title": "Visualización con ggplot2; Edición",
     "section": "Ajustar las escalas",
-    "text": "Ajustar las escalas\nTanto para facet_wrap() como facet_grid()es posible ajustar las escalas en los ejes de manera que sea el mismo para todos los paneles (fixed) o que pueda variar entre los paneles (free) utilizando los parámetros:\n\nscales= \"fixed\": Las escalas en el eje x y y esta fijas en todos los paneles.\nscales = \"free_x\": La escala en el eje x es variable y fija en el eje y.\nscales = \"free_y\": La escala en el eje y es variable y fija en el eje x.\nscales = \"free\": Las escalas de ambos ejes son variables\n\n\nggplot(penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species)) + \n  facet_wrap(~ island, scales = \"free_y\")\n\n\n\n\n\n\n\n\n\nggplot(penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species)) + \n  facet_wrap(~ island, scale = \"free_x\")\n\n\n\n\n\n\n\n\n\nggplot(penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species)) + \n  facet_wrap(~ island, scales = \"free\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nLas escalas fijas facilitan visualizar patrones entre los paneles; las escalas variables facilitan ver patrones dentro de cada panel\n\n\n\n\n\n\n\n\nDesafio paneles\n\n\n\n\nRecrea la siguiente figura:\n\n\nver codigo\npenguins_noisland &lt;- penguins %&gt;% \n  select(-island)\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+\n  geom_point(data = penguins_noisland, color = \"grey75\")+\n  geom_point(aes(color = island))+\n  facet_wrap(~island) \n\n\n\n\n\n\n\n\n\nver codigo\n# alternativo\nggplot()+\n  geom_point(data = penguins_noisland, aes(x = bill_length_mm, y = body_mass_g), color = \"grey75\", alpha = 0.4)+\n  geom_point(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = island))+\n  facet_wrap(~island)\n\n\n\n\n\n\n\n\n\n\nTip1: Tienes que utilizar dos geom_points(); una con la base de datos original y una transformada.\nTip2: Presta atención en donde pones el parámetro color para cada geom."
+    "text": "Ajustar las escalas\nTanto para facet_wrap() como facet_grid()es posible ajustar las escalas en los ejes de manera que sea el mismo para todos los paneles (fixed) o que pueda variar entre los paneles (free) utilizando los parámetros:\n\nscales= \"fixed\": Las escalas en el eje x y y esta fijas en todos los paneles.\nscales = \"free_x\": La escala en el eje x es variable y fija en el eje y.\nscales = \"free_y\": La escala en el eje y es variable y fija en el eje x.\nscales = \"free\": Las escalas de ambos ejes son variables\n\n\nggplot(penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species)) + \n  facet_wrap(~ island, scales = \"free_y\")\n\n\n\n\n\n\n\n\n\nggplot(penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species)) + \n  facet_wrap(~ island, scale = \"free_x\")\n\n\n\n\n\n\n\n\n\nggplot(penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species)) + \n  facet_wrap(~ island, scales = \"free\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nLas escalas fijas facilitan visualizar patrones entre los paneles; las escalas variables facilitan ver patrones dentro de cada panel\n\n\n\n\n\n\n\n\nDesafio paneles\n\n\n\n\nRecrea la siguiente figura:\n\n\nver codigo\npenguins_noisland &lt;- penguins %&gt;% \n  select(-island)\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+\n  geom_point(data = penguins_noisland, color = \"grey75\")+\n  geom_point(aes(color = island))+\n  facet_wrap(~island) \n\n\n\n\n\n\n\n\n\nver codigo\n# alternativo\n#ggplot()+\n#  geom_point(data = penguins_noisland, aes(x = bill_length_mm, y = body_mass_g), color = \"grey75\", alpha = 0.4)+\n#  geom_point(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = #island))+\n#  facet_wrap(~island)\n\n\n\nTip1: Tienes que utilizar dos geom_points(); una con la base de datos original y una transformada.\nTip2: Presta atención en donde pones el parámetro color para cada geom."
   },
   {
     "objectID": "7_VisualizationGgplot2.html#themes-prediseñados",
@@ -1166,7 +1166,7 @@
     "href": "slides/ggplot_edicion.html#ajuste-manual-por-grupo",
     "title": "ggplot2 pt II: Edición",
     "section": "Ajuste manual por grupo",
-    "text": "Ajuste manual por grupo\nEn ejemplos anteriores, donde usamos el argumento color dentro de los aes() ggplot2 asigna una paleta de colores default. Si queremos asignar colores específicos, podemos añadirlos manualmente usando las funciones:\n\nscale_color_manual()\nscale_fill_manual()\nscale_shape_manual()\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+    "text": "Ajuste manual por grupo\nEn ejemplos anteriores, donde usamos el argumento color dentro de los aes() ggplot2 asigna una paleta de colores default. Si queremos asignar colores específicos, podemos añadirlos manualmente usando las funciones:\n\nscale_color_manual()\nscale_fill_manual()\nscale_shape_manual()"
   },
   {
     "objectID": "7_VisualizationGgplot2.html#ajuste-global",
@@ -1195,5 +1195,47 @@
     "title": "ggplot2 pt II: Edición",
     "section": "",
     "text": "Al final de esta lección serás capaz de:\n\nModificar aspectos visuales como color, forma, transparencia, etc.\nGenerar paneles para dividir subconjuntos de datos.\nModificar el tema general de una gráfica.\nModificar etiquetas y leyendas.\nExportar una gráfica en distintos formatos."
+  },
+  {
+    "objectID": "slides/ggplot_edicion.html#paletas-de-colores",
+    "href": "slides/ggplot_edicion.html#paletas-de-colores",
+    "title": "ggplot2 pt II: Edición",
+    "section": "Paletas de colores",
+    "text": "Paletas de colores\n\n\n\nRColorBrewer: Paleta de colores categorizadas en secuenciales, divergentes y cualitativas diseñadas para ser amigables para personas con daltonismo asi como para ser impresa en escala de grises."
+  },
+  {
+    "objectID": "slides/ggplot_edicion.html#paletas-de-colores-1",
+    "href": "slides/ggplot_edicion.html#paletas-de-colores-1",
+    "title": "ggplot2 pt II: Edición",
+    "section": "Paletas de colores",
+    "text": "Paletas de colores\n\n\n\nviridis: Paleta de colores secuenciales diseñada para ser perceptualmente uniforme en escala de grises y amigable para personas con daltonismo."
+  },
+  {
+    "objectID": "7_2_combinar.html",
+    "href": "7_2_combinar.html",
+    "title": "Combinar gráficos con Patchwork",
+    "section": "",
+    "text": "La gramática presentada en ggplot2 se centra en crear gráficos individuales. Sin embargo, en ocasiones es necesario combinar múltiples gráficos en una sola visualización para facilitar la comparación y el análisis. Por supuesto que es posible hacer esto en algún programa de edición de imágenes, pero hacerlo directamente en R puede ser mucho más eficiente y reproducible.\nEl paquete patchwork en R proporciona una forma sencilla y flexible de combinar gráficos creados con ggplot2. Pathchwork permite organizar múltiples gráficos lado a lado o colocar un gráfico dentro de otro (inlets). Para fines de este curso, nos enfocaremos solamente en la primera funcionalidad."
+  },
+  {
+    "objectID": "7_2_combinar.html#colocar-gráficos-lado-a-lado.",
+    "href": "7_2_combinar.html#colocar-gráficos-lado-a-lado.",
+    "title": "Combinar gráficos con Patchwork",
+    "section": "Colocar gráficos lado a lado.",
+    "text": "Colocar gráficos lado a lado.\nPrimero instalaremos y cargaremos el paquete patchwork. También necesitaremos Tidyvese\n\n#install.packages(\"patchwork\")\nlibrary(tidyverse)\nlibrary(patchwork)\n\nLa forma mas simple de usar patchwork es simplemente usar el operador + para combinar dos o más gráficos. Aquí hay un ejemplo básico usando la base de datos de pingüinos de Palmer:\n\npinguinos &lt;- read_csv(\"data/palmer_penguins.csv\") %&gt;% \n  drop_na()\n\n\n# dispersión de masa corporal vs longitud de aleta\np1 &lt;- ggplot(pinguinos)+\n  geom_point(aes(x=flipper_length_mm, y=body_mass_g, color=species))+\n  labs(x = \"Longitud de aleta (mm)\",\n       y = \"Masa corporal (g)\",\n       color = \"Especie\")\n\n# dispersion de largo de pico vs profundidad de pico\np2 &lt;- ggplot(pinguinos)+\n  geom_point(aes(x=bill_length_mm, y=bill_depth_mm, color=species))+\n  labs(x = \"Longitud de pico (mm)\",\n       y = \"Profundidad de pico (mm)\",\n       color = \"Especie\")\n\n# gráfico de densidades de la masa corporal por especie\np3 &lt;- ggplot(pinguinos)+\n  geom_density(aes(x=body_mass_g, fill=species), alpha=0.5)+\n  labs(x = \"Masa corporal (g)\",\n       y = \"Densidad\",\n       fill = \"Especie\")\n\n# gráfico de barras de proporcion de sesos por especie\np4 &lt;- ggplot(pinguinos)+\n  geom_bar(aes(x = species, fill = sex), position = \"fill\")+\n  labs(x = \"Especie\",\n       y = \"Proporción\",\n       fill = \"Sexo\")\n\nAhora podemos combinar estos gráficos usando el operador +:\n\np1 + p2\n\n\n\n\n\n\n\n\nEl operador + no especifica ningún tipo de disposición (layout), solamente que los gráficos tienen que estar juntos. En la ausencia de una disposición definida, el comportamiento por defecto es similar a la función facet_wrap()el cual decide automáticamente el número de filas y columnas.\nSi usamos tres gráfica patchwork lo acomodará en una disposición de 1 x 3:\n\np1 + p2 + p3\n\n\n\n\n\n\n\n\nSi usamos cuatro gráficos patchwork lo acomodará en una disposición de 2 x 2:\n\np1 + p2 + p3 + p4"
+  },
+  {
+    "objectID": "7_2_combinar.html#mayor-control-en-el-layout",
+    "href": "7_2_combinar.html#mayor-control-en-el-layout",
+    "title": "Combinar gráficos con Patchwork",
+    "section": "Mayor control en el layout",
+    "text": "Mayor control en el layout\nPodemos tener mayor control sobre el layout usando los operadores / y | para especificar filas y columnas, respectivamente. Por ejemplo, si queremos que p1 y p2 este uno abajo del otro podemos usar el operador /:\n\np1 / p2\n\n\n\n\n\n\n\n\nPor el contrario, si utilizamos el operador | los gráficos se colocarán uno al lado del otro de manera equivalente a usar el operador +:\n\np1 | p2\n\n\n\n\n\n\n\n\nDe esta manera, podemos usar ambos operadores para hacer arreglos mas complejos:\n\n(p1 | p2) / (p3 | p4)\n\n\n\n\n\n\n\n\no como por ejemplo:\n\np1 / (p2 + p3 + p4)\n\n\n\n\n\n\n\n\nHasta el momento, cada gráfico en el arreglo muestra su propia leyenda, la cual puede ser redundante en algunos casos. Por ejemplo, consideremos p1 y p2:\n\np1 + p2\n\n\n\n\n\n\n\n\nEn estos casos, podemos eliminar la leyenda de p2 usando el argumento guides dentro de la función theme(). Sin embargo, patchwork también proporciona una forma sencilla de compartir leyendas entre gráficos usando la función plot_layout() y el argumento guides = \"collect\"\n\np1 + p2 + plot_layout(guides = \"collect\")\n\n\n\n\n\n\n\n\nEste argumento colectará todas las guías y las pondrá juntas en la posición de acuerdo al tema (theme) global. Además, eliminará cualquier guía duplicada dejando solamente las únicas de acuerdo al tipo de geometría que se este usando.\n\np1 + p2 + p3 + p4 + plot_layout(guides = \"collect\")\n\n\n\n\n\n\n\n\n\np1 + p2 + (p3 + theme(legend.position = \"none\")) + p4 + plot_layout(guides = \"collect\")"
+  },
+  {
+    "objectID": "7_2_combinar.html#ajustar-parámetros-globales",
+    "href": "7_2_combinar.html#ajustar-parámetros-globales",
+    "title": "Combinar gráficos con Patchwork",
+    "section": "Ajustar parámetros globales",
+    "text": "Ajustar parámetros globales\nEn ocasiones es necesario modificar todos los gráficos en el arreglo al mismo tiempo. Por ejemplo, ajustar un mismo theme a todos.\nPara estos situaciones, patchwork utiliza el operador &\n\np1 + p2 & theme_minimal()\n\n\n\n\n\n\n\n\nCon esto también es posible ajustar otros parámetros como escala de colores, tamaños de texto, ejes, etc.\n\ncolores &lt;- c(\"tomato\", \"lightblue\", \"lightgreen\")\n\np1 + p2 & scale_color_manual(values = colores) &\n  theme_minimal() \n\n\n\n\n\n\n\n\n\nAñadir anotaciones\nUna vez que todos los gráficos se han ensamblado, estos forman una sola unidad. Esto significa que los títulos, subtítulos y otras anotaciones pueden ser añadidos a todo el conjunto usando la función plot_annotation()\n\n# modificar las etiquetas en la leyenda de p4\np4 &lt;- p4 + \n  scale_fill_discrete(labels = c(\"hembra\", \"macho\"))\n\np124 &lt;- p1 / (p2 + p4) + plot_layout(guides = \"collect\")\np124 &lt;- p124 + plot_annotation(\n  title = \"Pingüinos de Palmer\",\n  subtitle = \"Comparación entre especies\",\n  caption = \"Datos: Palmer Archipelago (Antarctica) penguin data\"\n)\n\np124\n\n\n\n\n\n\n\n\nOtro tipo de anotación que es especialmente relevante en la literatura científica es agregar una etiqueta a cada subplot para identificarlas en el texto o en el pie de figura.\nPara esto se puede utilizar el argumento tag_levels:\n\np124 &lt;- p124 + plot_annotation(tag_levels = \"A\", tag_suffix = \")\")\np124 &lt;- p124 & \n  theme_classic()\np124"
   }
 ]
