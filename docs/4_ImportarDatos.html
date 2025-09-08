@@ -164,6 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Visualización con ggplot2; Edición</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./7_2_combinar.html">
+ <span class="dropdown-text">Combinar gráficos con Patchwork</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./8_ggplotNoCode.html">
  <span class="dropdown-text">ggplot2 sin codigo</span></a>
   </li>  
@@ -591,12 +595,15 @@ cols(
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readxl' was built under R version 4.5.1</code></pre>
+</div>
 </div>
 <p>Con esto podemos usar la función <code>read_excel()</code> que no necesita ningún otro argumento mas que la ruta (<em>path</em>) donde se encuentra el archivo <code>.xlsx</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>excel_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>excel_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 405 × 9
    `Sample ID` ExpNum TreatTemp Meas_Temp `WetWeight(g)` `buffer(ml)`
@@ -617,18 +624,18 @@ cols(
 </div>
 <p>En caso de que los datos de interes estén en una hoja en particular usamos el argumento <code>sheet=</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>excel_df<span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"hoja1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>excel_df<span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"hoja1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Un caso mas complicado es cuando nuestro datos inician unas filas mas abajo y en un determinado intervalo de columnas. Otro caso común es que los nombres de las columnas tengan símbolos especiales o que estén repetidos</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">skip =</span> <span class="dv">3</span>, <span class="at">na =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">skip =</span> <span class="dv">3</span>, <span class="at">na =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 • `pendiente` -&gt; `pendiente...9`
 • `pendiente` -&gt; `pendiente...10`</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>excel_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>excel_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 405 × 10
    `Número de muestra` `Número de experimento` Tratamiento Temperatura
@@ -651,14 +658,14 @@ cols(
 </div>
 <p>En caso de que tengamos otra información que nos este generando conflicto podemos especificar el rango de datos de interés</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">range =</span> <span class="st">"D4:M409"</span>, <span class="at">na =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">range =</span> <span class="st">"D4:M409"</span>, <span class="at">na =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 • `pendiente` -&gt; `pendiente...9`
 • `pendiente` -&gt; `pendiente...10`</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>excel_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>excel_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 405 × 10
    `Número de muestra` `Número de experimento` Tratamiento Temperatura
@@ -704,8 +711,8 @@ Heterogeneidad en los nombres de las columna 🤯
 <p>El paquete <strong>Janitor</strong> es una herramienta pequeña pero increíblemente útil y conveniente cuando se trata de limpiar y mantener conjuntos de datos en R. Además, es un paquete orientado a <em>Tidyverse</em>, por lo que se integra perfectamente con los pipes.</p>
 <p>Regresemos a los nombres de las columnas de nuestro archivo excel antes de utilizar janitor</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">range =</span> <span class="st">"D4:M409"</span>, <span class="at">na =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>excel_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">range =</span> <span class="st">"D4:M409"</span>, <span class="at">na =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -730,7 +737,7 @@ Heterogeneidad en los nombres de las columna 🤯
 </div>
 <p>Ahora utilicemos <strong>janitor</strong> para limpiar las etiquetas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'janitor'</code></pre>
@@ -742,8 +749,8 @@ Attaching package: 'janitor'</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>excel_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(excel_df)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>excel_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>excel_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(excel_df)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>excel_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 405 × 10
    numero_de_muestra numero_de_experimento tratamiento temperatura peso_humedo_g
@@ -775,8 +782,8 @@ Attaching package: 'janitor'</code></pre>
 </ul>
 <p>por ejemplo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>excel_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(excel_df, <span class="at">case =</span> <span class="st">"screaming_snake"</span>)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>excel_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>excel_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(excel_df, <span class="at">case =</span> <span class="st">"screaming_snake"</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>excel_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 405 × 10
    NUMERO_DE_MUESTRA NUMERO_DE_EXPERIMENTO TRATAMIENTO TEMPERATURA PESO_HUMEDO_G
@@ -798,10 +805,10 @@ Attaching package: 'janitor'</code></pre>
 </div>
 <p>Para ahorrar tiempo, con <strong>janitor</strong> podemos integrar la función <code>make_clean_name</code> al momento de importar datos ya sea con <strong>readxl</strong> o con <strong>readr</strong>. Por ejemplo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>excel_clean <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">range =</span> <span class="st">"D4:M409"</span>, <span class="at">na =</span> <span class="st">"-"</span>,</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">.name_repair =</span>  make_clean_names)</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>excel_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>excel_clean <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/actividad_enzimas.xlsx"</span>, </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"hoja3"</span>, <span class="at">range =</span> <span class="st">"D4:M409"</span>, <span class="at">na =</span> <span class="st">"-"</span>,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">.name_repair =</span>  make_clean_names)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>excel_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 405 × 10
    numero_de_muestra numero_de_experimento tratamiento temperatura peso_humedo_g
@@ -856,7 +863,7 @@ Warning
 <p>Hay varias funciones que podemos utilizar. Ya mencionamos algunas herramienta como <code>head()</code> o <code>tail()</code> para echar un vistazo a las primeras o últimas filas de la tabla, respectivamente.</p>
 <p>Otra herramienta es la función <code>glimpse()</code> de <strong>dplyr</strong> que nos muestra algunos datos de cada columna de nuestro tibble para tener una idea de la estructura de la tabla.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(excel_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(excel_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 405
 Columns: 10
@@ -874,7 +881,7 @@ $ pendiente_2            &lt;dbl&gt; 2.660772, 2.331190, 11.503215, 10.498392, 2
 </div>
 <p>La función <code>summary()</code> es parte de las funciones base de R y es particularmente útil cuando tenemos datos continuos, ya que nos muestra, para cada columna, los valores mínimos, máximos, promedio, mediana y el 1er y 3er quartil.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(excel_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(excel_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> numero_de_muestra  numero_de_experimento  tratamiento     temperatura   
  Length:405         Min.   :1.000         Min.   :18.00   Min.   :18.00  
@@ -908,7 +915,7 @@ $ pendiente_2            &lt;dbl&gt; 2.660772, 2.331190, 11.503215, 10.498392, 2
 <p>Una vez terminado nuestro análisis debemos guardarlo. Siguiendo la recomendación que vimos anteriormente, lo ideal es guardar los datos ya procesados (ya sea que se haya realizado algún tipo de filtrado o transformación) en una carpeta diferente a la carpeta donde están los datos crudos, los cuales se recomienda que se preserven sin alteraciones.</p>
 <p>Podemos crear una nueva carpeta con <em>Archivos</em> &gt; <em>Nuevo directorio</em> o desde la línea de comando usando la función <code>dir.create()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"resultados/tablas"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"resultados/tablas"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in dir.create("resultados/tablas", recursive = TRUE):
 'resultados\tablas' already exists</code></pre>
@@ -917,8 +924,8 @@ $ pendiente_2            &lt;dbl&gt; 2.660772, 2.331190, 11.503215, 10.498392, 2
 <p>Para guardar nuestros datos, las funciones que utilizaremos mas frecuentemente son <code>write.table</code> y <code>write_csv()</code></p>
 <p>Por ejemplo, vamos a tomar las primeras filas de nuestro objeto <code>excel_clean</code> con la función <code>head()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>excel_subset <span class="ot">&lt;-</span> <span class="fu">head</span>(excel_clean)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>excel_subset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>excel_subset <span class="ot">&lt;-</span> <span class="fu">head</span>(excel_clean)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>excel_subset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
   numero_de_muestra numero_de_experimento tratamiento temperatura peso_humedo_g
@@ -935,11 +942,11 @@ $ pendiente_2            &lt;dbl&gt; 2.660772, 2.331190, 11.503215, 10.498392, 2
 </div>
 <p>Ahora lo guardamos en la carpeta que acabamos de crear usando la función <code>write_csv()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(excel_subset, <span class="at">file =</span> <span class="st">"resultados/tablas/excel_subset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(excel_subset, <span class="at">file =</span> <span class="st">"resultados/tablas/excel_subset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>o con <code>write.table()</code> la cual nos permite usar una mayor diversidad de formatos</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(excel_subset, <span class="at">file =</span> <span class="st">"resultados/tablas/excel_subset.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(excel_subset, <span class="at">file =</span> <span class="st">"resultados/tablas/excel_subset.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -962,18 +969,18 @@ $ pendiente_2            &lt;dbl&gt; 2.660772, 2.331190, 11.503215, 10.498392, 2
 <div class="cell">
 <details class="code-fold">
 <summary>ver codigo</summary>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importar datos. inicia con la tercera linea</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/ejercicio_readxls.xlsx"</span>, <span class="at">skip =</span> <span class="dv">3</span>)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># limpiar los nombres con janitor</span></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>e1_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(e1)</span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ver un summary de los datos</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(e1_clean)</span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="co"># guardar los datos en el directorio resultados/tablas</span></span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="at">x =</span> e1_clean, </span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"resultados/tablas/ejercicio_readxls_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importar datos. inicia con la tercera linea</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/ejercicio_readxls.xlsx"</span>, <span class="at">skip =</span> <span class="dv">3</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co"># limpiar los nombres con janitor</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>e1_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(e1)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ver un summary de los datos</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(e1_clean)</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="co"># guardar los datos en el directorio resultados/tablas</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="at">x =</span> e1_clean, </span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"resultados/tablas/ejercicio_readxls_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>

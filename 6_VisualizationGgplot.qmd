@@ -717,7 +717,7 @@ ggplot()+
 ```
 :::
 
-### Visualización de series de tiempo; geom_line()
+### Visualización de series; geom_line()
 
 Un gráfico de líneas es una representación visual de datos que muestra la relación entre dos variables, donde una variable se representa en el eje x y la otra en el eje y. Los puntos de datos se conectan mediante líneas para mostrar tendencias o patrones a lo largo del tiempo o de otra variable continua.
 
@@ -773,7 +773,9 @@ ggplot(respiracion_control, aes(x = dia, y = mo2, group = individuo, color = ind
   geom_point()
 ```
 
-**¿Como podrias agregar una línea con los valores promedio de cada individuo?**
+**¿Como podrías agregar una línea con los valores promedio de cada individuo?**
+
+Podemos calcular el promedio de cada individuo y luego agregarlo al gráfico utilizando `geom_line()` nuevamente. Primero, calculamos el promedio de `mo2` por `dia`, y luego lo graficamos.
 
 Podemos calcular el promedio de cada individuo y luego agregarlo al gráfico utilizando `geom_line()` nuevamente. Primero, calculamos el promedio de `mo2` por `dia`, y luego lo graficamos.
 
@@ -786,7 +788,9 @@ Podemos calcular el promedio de cada individuo y luego agregarlo al gráfico uti
 
 promedios_mo2 <- respiracion_control %>% 
   group_by(dia) %>% 
-  summarise(promedio_mo2 = mean(mo2, na.rm = TRUE), .groups = "drop") 
+  summarise(promedio_mo2 = mean(mo2, na.rm = TRUE),
+            desvest_mo2 = sd(mo2, na.rm = TRUE), 
+            .groups = "drop") 
 
 ggplot(respiracion_control) +
   geom_line(aes(x = dia, y = mo2, group = individuo, color = individuo)) +
@@ -795,3 +799,25 @@ ggplot(respiracion_control) +
 
 
 ```
+
+
+## Visualización de series; geom_ribbon()
+
+Si quisieramos representar de forma resumida el ejercicio anterior, podriamos mostrar el valor promedio en línea solida y las barrar de error en cada día. Otra opción es mostrar las barrar de error con un área sombreada. Para esto, podemos utilizar la geometría `geom_ribbon()`. 
+
+De manera similar a las barras de erorr `geom_ribbon()` requiere los argumentos `ymin` y `ymax` los cuales pueden ser los valores calculados de desviación estándar, intervalos de confianza, mínimo y máximo, etc. 
+
+```{r}
+ggplot()+
+  geom_line(data = promedios_mo2, aes(x = dia, y = promedio_mo2, group = 1),
+            color = "darkred") +
+  geom_ribbon(data = promedios_mo2, 
+             aes(x = dia, ymin = promedio_mo2 - desvest_mo2, 
+                          ymax = promedio_mo2 + desvest_mo2,
+                 group = 1), fill = "red", alpha = 0.1, 
+             color = "grey64",
+             linetype = "dashed")
+```
+
+
+

@@ -193,6 +193,10 @@ window.Quarto = {
  <span class="dropdown-text">Visualización con ggplot2; Edición</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./7_2_combinar.html">
+ <span class="dropdown-text">Combinar gráficos con Patchwork</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./8_ggplotNoCode.html">
  <span class="dropdown-text">ggplot2 sin codigo</span></a>
   </li>  
@@ -252,8 +256,9 @@ window.Quarto = {
   <li><a href="#variable-discreta-variable-continua" id="toc-variable-discreta-variable-continua" class="nav-link" data-scroll-target="#variable-discreta-variable-continua">Variable discreta + variable continua</a></li>
   <li><a href="#visualización-de-una-variable-continua-una-continua" id="toc-visualización-de-una-variable-continua-una-continua" class="nav-link" data-scroll-target="#visualización-de-una-variable-continua-una-continua">Visualización de una variable continua + una continua</a></li>
   <li><a href="#visualización-de-resumenes-estadisticos-geom_errorbar" id="toc-visualización-de-resumenes-estadisticos-geom_errorbar" class="nav-link" data-scroll-target="#visualización-de-resumenes-estadisticos-geom_errorbar">Visualización de resumenes estadisticos: <code>geom_errorbar()</code></a></li>
-  <li><a href="#visualización-de-series-de-tiempo-geom_line" id="toc-visualización-de-series-de-tiempo-geom_line" class="nav-link" data-scroll-target="#visualización-de-series-de-tiempo-geom_line">Visualización de series de tiempo; geom_line()</a></li>
+  <li><a href="#visualización-de-series-geom_line" id="toc-visualización-de-series-geom_line" class="nav-link" data-scroll-target="#visualización-de-series-geom_line">Visualización de series; geom_line()</a></li>
   </ul></li>
+  <li><a href="#visualización-de-series-geom_ribbon" id="toc-visualización-de-series-geom_ribbon" class="nav-link" data-scroll-target="#visualización-de-series-geom_ribbon">Visualización de series; geom_ribbon()</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1231,8 +1236,8 @@ Warning
 </div>
 </div>
 </section>
-<section id="visualización-de-series-de-tiempo-geom_line" class="level3">
-<h3 class="anchored" data-anchor-id="visualización-de-series-de-tiempo-geom_line">Visualización de series de tiempo; geom_line()</h3>
+<section id="visualización-de-series-geom_line" class="level3">
+<h3 class="anchored" data-anchor-id="visualización-de-series-geom_line">Visualización de series; geom_line()</h3>
 <p>Un gráfico de líneas es una representación visual de datos que muestra la relación entre dos variables, donde una variable se representa en el eje x y la otra en el eje y. Los puntos de datos se conectan mediante líneas para mostrar tendencias o patrones a lo largo del tiempo o de otra variable continua.</p>
 <p>En ggplot <code>geom_line()</code> permite graficar líneas conectando puntos, donde el <em>aesthetics</em> <code>group</code> nos permite definir que observaciones estan conectadas.</p>
 <p>Para entender mejor esta geometría, utilizaremos el archivo <code>respiracion.csv</code>dentro de la carpeta <code>data</code> el cual contiene valores de consumo de oxígeno diario en un molusco marino bajo dos condiciones experimentales: <strong>Control</strong> y <strong>Tratamiento</strong>.</p>
@@ -1304,19 +1309,22 @@ $ mo2         &lt;dbl&gt; 11.590873, 37.800033, 29.178135, 17.713133, 76.455721,
 </div>
 </div>
 </div>
-<p><strong>¿Como podrias agregar una línea con los valores promedio de cada individuo?</strong></p>
+<p><strong>¿Como podrías agregar una línea con los valores promedio de cada individuo?</strong></p>
+<p>Podemos calcular el promedio de cada individuo y luego agregarlo al gráfico utilizando <code>geom_line()</code> nuevamente. Primero, calculamos el promedio de <code>mo2</code> por <code>dia</code>, y luego lo graficamos.</p>
 <p>Podemos calcular el promedio de cada individuo y luego agregarlo al gráfico utilizando <code>geom_line()</code> nuevamente. Primero, calculamos el promedio de <code>mo2</code> por <code>dia</code>, y luego lo graficamos.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>ver codigo</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>promedios_mo2 <span class="ot">&lt;-</span> respiracion_control <span class="sc">%&gt;%</span> </span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dia) <span class="sc">%&gt;%</span> </span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">promedio_mo2 =</span> <span class="fu">mean</span>(mo2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) </span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(respiracion_control) <span class="sc">+</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> dia, <span class="at">y =</span> mo2, <span class="at">group =</span> individuo, <span class="at">color =</span> individuo)) <span class="sc">+</span></span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> promedios_mo2, <span class="fu">aes</span>(<span class="at">x =</span> dia, <span class="at">y =</span> promedio_mo2, <span class="at">group =</span> <span class="dv">1</span>), </span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">promedio_mo2 =</span> <span class="fu">mean</span>(mo2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">desvest_mo2 =</span> <span class="fu">sd</span>(mo2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) </span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(respiracion_control) <span class="sc">+</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> dia, <span class="at">y =</span> mo2, <span class="at">group =</span> individuo, <span class="at">color =</span> individuo)) <span class="sc">+</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> promedios_mo2, <span class="fu">aes</span>(<span class="at">x =</span> dia, <span class="at">y =</span> promedio_mo2, <span class="at">group =</span> <span class="dv">1</span>), </span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1326,9 +1334,32 @@ $ mo2         &lt;dbl&gt; 11.590873, 37.800033, 29.178135, 17.713133, 76.455721,
 </div>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="visualización-de-series-geom_ribbon" class="level2">
+<h2 class="anchored" data-anchor-id="visualización-de-series-geom_ribbon">Visualización de series; geom_ribbon()</h2>
+<p>Si quisieramos representar de forma resumida el ejercicio anterior, podriamos mostrar el valor promedio en línea solida y las barrar de error en cada día. Otra opción es mostrar las barrar de error con un área sombreada. Para esto, podemos utilizar la geometría <code>geom_ribbon()</code>.</p>
+<p>De manera similar a las barras de erorr <code>geom_ribbon()</code> requiere los argumentos <code>ymin</code> y <code>ymax</code> los cuales pueden ser los valores calculados de desviación estándar, intervalos de confianza, mínimo y máximo, etc.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> promedios_mo2, <span class="fu">aes</span>(<span class="at">x =</span> dia, <span class="at">y =</span> promedio_mo2, <span class="at">group =</span> <span class="dv">1</span>),</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> promedios_mo2, </span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> dia, <span class="at">ymin =</span> promedio_mo2 <span class="sc">-</span> desvest_mo2, </span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ymax =</span> promedio_mo2 <span class="sc">+</span> desvest_mo2,</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">group =</span> <span class="dv">1</span>), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, </span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"grey64"</span>,</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="6_VisualizationGgplot_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
 </section>
 </section>
 
