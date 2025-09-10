@@ -214,7 +214,7 @@
     "href": "index.html#temario-del-curso",
     "title": "Análisis de datos con Tidyverse",
     "section": "Temario del curso",
-    "text": "Temario del curso\n\n\n\n\n\n\n\n\nDía\nHora\nTema\n\n\n\n\nLunes\n10:00 - 14:00\nIntroducción\n\nIntroducción a R y Tidyverse\nFamiliarización con el IDE Rstudio\nCreación y organización de proyectos con Rstudio\nImportar y exportar datos\nTibbles\nUso de Posit Cloud\n\n\n\nMartes\n10:00 - 14:00\nManipulación de datos con Dplyr\n\nselect()\nfilter()\nmutate()\npipes %&gt;%\nOperaciones agrupadas group_by()\nsummarise()\n\n\n\nMiércoles\n10:00 - 14:00\nVisualización de datos con ggplot\n\nGramática de las gráficas\nGeoms y aestethics\n\n\n\nJueves\n10::00 - 14:00\nVisualización de datos con ggplot\n\nEdición (temas, etiquetas, paletas de colores)\nggplot sin código\n\n\n\nViernes\n10:00 - 14:00\nManipulación de tablas\n\nPivot\nUnión de tablas\nTransformaciones por columnas (across())\n\nAnálisis de series de tiempo\n\nLubridate"
+    "text": "Temario del curso\n\n\n\n\nDía\nHora\nTema\n\n\n\n\n\n\nLunes\n09:00 - 11:30\nIntroducción a R y Tidyverse\n\n\n\n\n\n\nRstudio y R base\n\n\n\n\n\n\nProyectos en Rstudio y PositCloud\n\n\n\n\n\n11:45 - 14:00\nImportar datos\n\n\n\n\nMartes\n09:00 - 14:00\nManipulación de datos con Dplyr\n\n\n\n\nMiércoles\n09:00 - 14:00\nVisualización con ggplot2\n\n\n\n\nJueves\n09:00 - 11:30\nVisualización con ggplot2; Edición\n\n\n\n\n\n11:45 - 14:00\nCombinar gráficos con Patchwork\n\n\n\n\n\n\nggplot sin código\n\n\n\n\nViernes\n09:00 - 11:30\nManipulacion de tablas\n\n\n\n\n\n11:45 - 14:00\nSeries de tiempo con Lubridate"
   },
   {
     "objectID": "9_Union.html",
