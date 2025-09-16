@@ -24,31 +24,21 @@ Que el alumno adquiera habilidades prácticas para importar, explorar, transform
 
 ## Temario del curso
 
-
-
-
-:::{.table .table-bordered .table-hover .table-striped .align-left .text-left}
-
-
-
-| Día       | Hora            | Tema                                                                                     |                                                                  |                                                                  |
-|-----------|-----------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------------|--------------------------------------------------------------------|
-| Lunes     | 09:00 - 11:30   | [Introducción a R y Tidyverse](https://trippv.github.io/CursoTidyverse2025/1_Introduccion.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/introduccion.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
-|           |                 | [Rstudio y R base](https://trippv.github.io/CursoTidyverse2025/2_RBasico.html)            |                                                                    |                                                                    |
-|           |                 | [Proyectos en Rstudio y PositCloud](https://trippv.github.io/CursoTidyverse2025/3_Proyectos.html) |                                                                    |                                                                    |
-|           | 11:45 - 14:00   | [Importar datos](https://trippv.github.io/CursoTidyverse2025/4_ImportarDatos.html)        | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/importar.html){style="font-size:1.5rem; color:grey;"} |                                                                    |
-| Martes    | 09:00 - 14:00   | [Manipulación de datos con Dplyr](https://trippv.github.io/CursoTidyverse2025/5_DataWrangling.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/dplyr.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
-| Miércoles | 09:00 - 14:00   | [Visualización con ggplot2](https://trippv.github.io/CursoTidyverse2025/6_VisualizationGgplot.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
-| Jueves    | 09:00 - 11:30   | [Visualización con ggplot2; Edición](https://trippv.github.io/CursoTidyverse2025/7_VisualizationGgplot2.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
-|           | 11:45 - 14:00   | [Combinar gráficos con Patchwork](https://trippv.github.io/CursoTidyverse2025/7_2_combinar.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |                                                                    |
-|           |                 | [ggplot sin código](https://trippv.github.io/CursoTidyverse2025/8_ggplotNoCode.html)      |                                                                    |                                                                    |
-| Viernes   | 09:00 - 11:30   | [Manipulacion de tablas](https://trippv.github.io/CursoTidyverse2025/9_Union.html)        | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |                                                                    |
-|           | 11:45 - 14:00   | [Series de tiempo con Lubridate](https://trippv.github.io/CursoTidyverse2025/11_TimeSeries.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |                                                                    |
+::: {.table .table-bordered .table-hover .table-striped .align-left .text-left}
+| Día | Hora | Tema |   |   |
+|-------------|-------------|--------------------|--------------|--------------|
+| Lunes | 09:00 - 11:30 | [Introducción a R y Tidyverse](https://trippv.github.io/CursoTidyverse2025/1_Introduccion.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/introduccion.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
+|  |  | [Rstudio y R base](https://trippv.github.io/CursoTidyverse2025/2_RBasico.html) |  |  |
+|  |  | [Proyectos en Rstudio y PositCloud](https://trippv.github.io/CursoTidyverse2025/3_Proyectos.html) |  |  |
+|  | 11:45 - 14:00 | [Importar datos](https://trippv.github.io/CursoTidyverse2025/4_ImportarDatos.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/importar.html){style="font-size:1.5rem; color:grey;"} |  |
+| Martes | 09:00 - 14:00 | [Manipulación de datos con Dplyr](https://trippv.github.io/CursoTidyverse2025/5_DataWrangling.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/dplyr.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
+| Miércoles | 09:00 - 14:00 | [Visualización con ggplot2](https://trippv.github.io/CursoTidyverse2025/6_VisualizationGgplot.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
+| Jueves | 09:00 - 11:30 | [Visualización con ggplot2; Edición](https://trippv.github.io/CursoTidyverse2025/7_VisualizationGgplot2.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
+|  | 11:45 - 14:00 | [Combinar gráficos con Patchwork](https://trippv.github.io/CursoTidyverse2025/patchwork.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |  |
+|  |  | [ggplot sin código](https://trippv.github.io/CursoTidyverse2025/8_ggplotNoCode.html) |  |  |
+| Viernes | 09:00 - 11:30 | [Manipulacion de tablas](https://trippv.github.io/CursoTidyverse2025/9_Union.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |  |
+|  | 11:45 - 14:00 | [Series de tiempo con Lubridate](https://trippv.github.io/CursoTidyverse2025/11_TimeSeries.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |  |
 :::
-
-
-
-
 
 ```{r}
 #| eval: false
@@ -69,4 +59,3 @@ Para curso necesitaremos tener instaladas las ultimas versiones de R y Rstudio. 
 Durante el curso estaremos trabajando desde un espacio en la nube. Puedes acceder en el siguiente enlace
 
 [https://posit.cloud/](https://posit.cloud/){target="_blank"}
-

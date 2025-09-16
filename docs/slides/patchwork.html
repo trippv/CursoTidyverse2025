@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.53">
 
   <meta name="author" content="Miguel A. Tripp Valdez">
-  <title>Tidyverse – Importar datos</title>
+  <title>Tidyverse – Patchwork</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -392,7 +392,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="img/tidyverse_cover.png" data-background-opacity="0.4" data-background-size="cover" class="quarto-title-block center">
-  <h1 class="title">Importar datos</h1>
+  <h1 class="title">Patchwork</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -406,141 +406,70 @@ Miguel A. Tripp Valdez
 </div>
 
 </section>
-<section id="tipos-de-datos" class="slide level2">
-<h2>Tipos de datos</h2>
-<p>La mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.</p>
-<h4 id="valores-separados-por-comas-.csv">1. Valores separados por comas (<code>,</code>) <span style="color:red;">.csv</span></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>nombre,edad,ciudad</span>
-<span id="cb1-2"><a></a>Ana,<span class="dv">28</span>,México</span>
-<span id="cb1-3"><a></a>Luis,<span class="dv">32</span>,Guadalajara</span>
-<span id="cb1-4"><a></a>Sofía,<span class="dv">25</span>,Monterrey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<h4 id="valores-separados-por-tabulador-t-.tsv-.txt">2. Valores separados por tabulador (<code>\t</code>) <span style="color:red;">.tsv .txt</span></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>nombre  edad    ciudad</span>
-<span id="cb2-2"><a></a>Ana <span class="dv">28</span>  México</span>
-<span id="cb2-3"><a></a>Luis    <span class="dv">32</span>  Guadalajara</span>
-<span id="cb2-4"><a></a>Sofía   <span class="dv">25</span>  Monterrey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<h3 id="archivos-excel">3. Archivos excel</h3>
-</section>
-<section id="funciones-mas-comunes" class="slide level2">
-<h2>Funciones mas comunes</h2>
-<p><span style="color:blue;"><code>read.table()</code></span> es la función mas básica para importar</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="|1,|2,|3,|4,|5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">"ruta/archivo.txt"</span>, <span class="co">#ruta al archivo (incluye extensión)</span></span>
-<span id="cb3-2"><a></a>                 <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="co">#tipo de separado</span></span>
-<span id="cb3-3"><a></a>                 <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="co">#tiene encabezado (primera fila)</span></span>
-<span id="cb3-4"><a></a>                 <span class="at">dec =</span> <span class="st">","</span>, <span class="co">#tipo de separador de decimales</span></span>
-<span id="cb3-5"><a></a>                 <span class="at">skip =</span> <span class="dv">1</span> <span class="co">#salta n filas antes de empezar a leer</span></span>
-<span id="cb3-6"><a></a>                )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<div class="fragment fade-in">
-<p><span style="color:blue;"><code>read.csv()</code></span> permite importar directamente archivos .csv</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"ruta/archivo.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-
-<img data-src="img/handson.png" class="quarto-figure quarto-figure-center r-stretch" alt="manos a la obra" width="751"></section>
-<section id="importar-datos-a-lá-tidyverse" class="slide level2">
-<h2>Importar datos a lá Tidyverse</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><a href="https://readr.tidyverse.org/index.html" target="_blank"> <img src="img/readr_logo.png" width="250"> </a></p>
-</div><div class="column" style="width:70%;">
+<section id="objetivos-de-la-sesión" class="slide level2">
+<h2>Objetivos de la sesión</h2>
 <ul>
-<li><p><code>read_csv()</code> → archivos .csv (coma)</p></li>
-<li><p><code>read_tsv()</code> → archivos .tsv (tabulador)</p></li>
-<li><p><code>read_delim()</code> → separador personalizado</p></li>
-<li><p><code>read_lines()</code> → lectura línea por línea</p></li>
-<li><p><code>read_table()</code> → separados por espacios en blanco</p></li>
+<li>Introducir la librería <strong>patchwork</strong> en R<br>
+</li>
+<li>Aprender a combinar gráficos de <strong>ggplot2</strong><br>
+</li>
+<li>Explorar ejemplos prácticos para análisis de datos</li>
 </ul>
-</div></div>
 </section>
-<section class="slide level2">
-
-
-<img data-src="img/handson.png" class="quarto-figure quarto-figure-center r-stretch" alt="manos a la obra" width="751"></section>
-<section id="tibbles" class="slide level2">
-<h2>Tibbles</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+<section id="qué-es-patchwork" class="slide level2">
+<h2>¿Qué es patchwork?</h2>
 <ul>
-<li>No imprime todo el contenido en pantalla</li>
-<li>No convierte texto a otros formatos</li>
-<li>No modifica formato de los nombres de columnas</li>
+<li>Es un paquete de R creado por Thomas Lin Pedersen<br>
+</li>
+<li>Permite <strong>combinar múltiples gráficos</strong> hechos con <code>ggplot2</code><br>
+</li>
+<li>Utiliza una sintaxis intuitiva con operadores <code>+</code>, <code>/</code> y <code>|</code></li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="img/tibble_logo.jpg" style="margin: auto;" width="396"></p>
-</div></div>
-</section>
-<section id="leer-archivos-desde-ms-excel" class="slide level2">
-<h2>Leer archivos desde MS Excel</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li><code>readxl</code> permite <strong>leer archivos Excel (.xls y .xlsx)</strong> fácilmente en R.</li>
-<li>Es parte del universo <code>tidyverse</code>, aunque no se carga por defecto.</li>
-<li><strong>Sin dependencias externas</strong> → funciona en Windows, macOS y Linux.</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img src="https://readxl.tidyverse.org/logo.png" width="80%" style="margin: auto;"></p>
-</div></div>
-</section>
-<section id="leer-archivos-desde-ms-excel-1" class="slide level2">
-<h2>Leer archivos desde MS Excel</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/ejercicio_readxls.xlsx"</span>), <span class="co"># ruta del archivo</span></span>
-<span id="cb5-2"><a></a>                  <span class="at">sheet =</span> <span class="dv">1</span>, <span class="co"># Hoja en donde se encuentran los datos.</span></span>
-<span id="cb5-3"><a></a>                  <span class="at">skip =</span> <span class="dv">2</span>, <span class="co"># saltar n líneas</span></span>
-<span id="cb5-4"><a></a>                  <span class="at">range =</span> <span class="cn">NULL</span>, <span class="co"># intervalo de celdas donde estan los datos</span></span>
-<span id="cb5-5"><a></a>                  <span class="at">na =</span> <span class="st">"na"</span> <span class="co">#simbolo para na. default celdas vacias </span></span>
-<span id="cb5-6"><a></a>                  )</span>
-<span id="cb5-7"><a></a></span>
-<span id="cb5-8"><a></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 300 × 13
-   `Número de individuo` Grupo `peso humedo (g)` `Longitud Total (cm)`
-                   &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;                 &lt;dbl&gt;
- 1                     1 A                     4                    14
- 2                     2 A                    12                    10
- 3                     3 A                    13                    11
- 4                     4 A                     4                    19
- 5                     5 A                     2                    23
- 6                     6 A                     9                    24
- 7                     7 A                     5                    10
- 8                     8 A                    14                    10
- 9                     9 A                    14                    18
-10                    10 A                     3                    12
-# ℹ 290 more rows
-# ℹ 9 more variables: `Relación masa &amp; longitud (g/cm)` &lt;dbl&gt;,
-#   `% gonada` &lt;dbl&gt;, TEMPERATURA &lt;chr&gt;, `Sexo (M/F)` &lt;chr&gt;,
-#   `# de localidad` &lt;chr&gt;, `num-huevos_producidos` &lt;dbl&gt;, T_media &lt;dbl&gt;,
-#   t_media &lt;dbl&gt;, `:)` &lt;chr&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(mpg, disp)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="fu">factor</span>(cyl), mpg)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"tomato"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(hp, mpg)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"darkgreen"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(wt, mpg)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"purple"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="janitor" class="slide level2">
-<h2>Janitor</h2>
-<ul>
-<li><code>{janitor}</code> es un paquete útil para la limpieza de nombres de columnas</li>
-<li>Muy útil en flujos de trabajo <code>tidyverse</code>.</li>
-<li>Especialmente práctico al importar datos de Excel o CSV.</li>
-</ul>
+<section id="combinar-gráficos-con" class="slide level2">
+<h2>Combinar gráficos con “+”</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="img/janitor.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="tipos-de-estructura-de-nombres" class="slide level2">
-<h2>Tipos de estructura de nombres</h2>
-<div class="quarto-figure quarto-figure-center">
+</div>
+<img data-src="patchwork_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="combinar-gráficos-con-1" class="slide level2">
+<h2>Combinar gráficos con “|”</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="patchwork_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="combinar-gráficos-con-2" class="slide level2">
+<h2>Combinar gráficos con “/”</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>p1 <span class="sc">/</span> p2 <span class="sc">/</span> p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="patchwork_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section id="combinar-gráficos-con-operadores-mixtos" class="slide level2">
+<h2>Combinar gráficos con operadores mixtos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>(p1 <span class="sc">|</span> p2) <span class="sc">/</span> (p3 <span class="sc">|</span> p4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
 <figure>
-<p><img data-src="img/cases.jpeg" class="quarto-figure quarto-figure-center" width="712"></p>
+<p><img data-src="patchwork_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
 </figure>
+</div>
+</div>
 </div>
 
 <div class="quarto-auto-generated-content">

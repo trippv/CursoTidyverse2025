@@ -11,7 +11,7 @@ format:
     toc: false
     logo: "img/logo.png"
     echo: true
-    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2025/)"
     css: ../styles/custom.css
 title-slide-attributes: 
   data-background-image: img/tidyverse_cover.png
@@ -181,4 +181,4 @@ data
 
 ## Tipos de estructura de nombres
 
-![](img/cases.jpeg){fig-align="center"}
+![](img/cases.jpeg){fig-align="center" width="712"}

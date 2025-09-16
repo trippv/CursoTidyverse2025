@@ -1,0 +1,80 @@
+---
+title: "Patchwork"
+author: "Miguel A. Tripp Valdez"
+institute: CIBNOR
+format: 
+  revealjs:
+    theme: default
+    width: 1200
+    slide-number: c/t
+    transition: fade
+    toc: false
+    logo: "img/logo.png"
+    echo: true
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2025/)"
+    css: ../styles/custom.css
+title-slide-attributes: 
+  data-background-image: img/tidyverse_cover.png
+  data-background-size: cover
+  data-background-opacity: "0.4"
+---
+
+
+
+## Objetivos de la sesión
+
+- Introducir la librería **patchwork** en R  
+- Aprender a combinar gráficos de **ggplot2**  
+- Explorar ejemplos prácticos para análisis de datos  
+
+---
+
+## ¿Qué es patchwork?
+
+- Es un paquete de R creado por Thomas Lin Pedersen  
+- Permite **combinar múltiples gráficos** hechos con `ggplot2`  
+- Utiliza una sintaxis intuitiva con operadores `+`, `/` y `|`  
+
+```{r}
+library(tidyverse)
+library(patchwork)
+
+p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_point(color = "steelblue") + theme_minimal()
+
+p2 <- ggplot(mtcars, aes(factor(cyl), mpg)) + geom_boxplot(fill = "tomato") + theme_minimal()
+
+p3 <- ggplot(mtcars, aes(hp, mpg)) + geom_point(color = "darkgreen") + theme_minimal()
+
+p4 <- ggplot(mtcars, aes(wt, mpg)) + geom_point(color = "purple") + theme_minimal()
+
+```
+
+
+## Combinar gráficos con  "+"
+
+```{r}
+p1 + p2
+
+```
+
+
+## Combinar gráficos con "|"
+
+```{r}
+p1 | p2 | p3
+
+```
+
+## Combinar gráficos con "/"
+
+```{r}
+p1 / p2 / p3
+
+```
+
+## Combinar gráficos con operadores mixtos
+
+```{r}
+(p1 | p2) / (p3 | p4)
+```
+
