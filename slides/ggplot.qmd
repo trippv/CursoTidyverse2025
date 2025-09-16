@@ -12,7 +12,7 @@ format:
     logo: "img/logo.png"
     echo: true
     footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2025/)"
-    css: styles/custom.scss
+    css: ../styles/custom.scss
 title-slide-attributes: 
   data-background-image: img/tidyverse_cover.png
   data-background-size: cover
