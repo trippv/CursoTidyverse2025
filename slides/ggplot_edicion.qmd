@@ -12,7 +12,7 @@ format:
     logo: "img/logo.png"
     echo: true
     footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2025/)"
-    css: styles/custom.scss
+    css: ../styles/custom.css
 title-slide-attributes: 
   data-background-image: img/tidyverse_cover.png
   data-background-size: cover
@@ -177,7 +177,7 @@ display.brewer.all(n = NULL, type = "all", select = NULL, exact.n = TRUE)
 
 ## Paletas de colores
 
-::: columns
+::::: columns
 ::: {.column .medium width="30%"}
 -   **viridis**: Paleta de colores secuenciales diseñada para ser perceptualmente uniforme en escala de grises y amigable para personas con daltonismo.
 :::
@@ -185,10 +185,9 @@ display.brewer.all(n = NULL, type = "all", select = NULL, exact.n = TRUE)
 ::: {.column width="70%"}
 ![](img/viridis_col_pal.png)
 :::
-:::
+:::::
 
-
------------------------------------------------------------
+------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
@@ -227,4 +226,3 @@ library(patchwork)
 p1 / p2 / p3
 
 ```
-

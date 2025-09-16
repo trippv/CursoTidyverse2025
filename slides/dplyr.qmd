@@ -12,7 +12,7 @@ format:
     logo: "img/logo.png"
     echo: true
     footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
-    css: styles/custom.scss
+    css: ../styles/custom.css
 title-slide-attributes: 
   data-background-image: img/tidyverse_cover.png
   data-background-size: cover
@@ -373,14 +373,12 @@ Con esta nueva tabla y usando las herramientas vista al momento, contesta lo sig
 -   ¿Que actividad tiene el mayor número de registros?
 -   ¿Que actividad tiene el mayor número de registros con resultado fatal?
 -   ¿Que país tiene el mayor número de registros de tiburón blanco?
-
 :::
 :::::
 
-
 ------------------------------------------------------------------------
 
-## Ejercicio: { .smaller}
+## Ejercicio: {.smaller}
 
 A continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (`body_mass_g`) y el tamaño de la aleta (`flipper_length_mm`) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:
 
@@ -404,7 +402,6 @@ summarise(aleta_peso_ratio_promedio = mean(aleta_peso_ratio, na.rm = TRUE))
 mutate(aleta_peso_ratio = body_mass_g/flipper_length_mm)
 ```
 
-
 ```{r}
 #| eval: true
 #| include: true
@@ -413,4 +410,3 @@ mutate(aleta_peso_ratio = body_mass_g/flipper_length_mm)
 
 countdown::countdown(5, warn_when = 10)
 ```
-
