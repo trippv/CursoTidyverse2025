@@ -12,8 +12,8 @@ format:
     toc: false
     logo: "img/logo.png"
     echo: true
-    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
-    css: styles/custom.scss
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2025/)"
+    css: ../styles/custom.css
 title-slide-attributes: 
   data-background-image: img/tidyverse_cover.png
   data-background-size: cover
@@ -62,7 +62,6 @@ title-slide-attributes:
 
 ![tomado de: utrectUniversity](img/collection.png){fig-align="center"}
 
-
 ------------------------------------------------------------------------
 
 ## ¿Que ventajas tiene usar Tidyverse?
@@ -75,8 +74,8 @@ title-slide-attributes:
 :::
 ::::
 
-:::::::: columns
-::: {.column width="40%"}
+::::::: columns
+:::: {.column width="40%"}
 ::: {.fragment .fade-in}
 ```{r}
 #| echo: false
@@ -92,7 +91,7 @@ df <- data.frame(
 df
 ```
 :::
-:::
+::::
 
 :::: {.column width="60%"}
 ::: {.fragment .fade-in}
@@ -103,8 +102,7 @@ base <- base[order(base$nota, decreasing = TRUE), ]
 ```
 :::
 ::::
-:::
-
+:::::::
 
 ------------------------------------------------------------------------
 
@@ -114,11 +112,11 @@ base <- base[order(base$nota, decreasing = TRUE), ]
 ::: {.column width="100%"}
 -   Eficiencia y consistencia
 -   Simplificación de código
--   <span style="color:red">Intuitivo para el humano</span>
+-   [Intuitivo para el humano]{style="color:red"}
 :::
 ::::
 
-:::::::: columns
+:::::: columns
 ::: {.column width="40%"}
 ```{r}
 #| echo: false
@@ -134,8 +132,6 @@ df <- data.frame(
 df
 ```
 :::
-
-
 
 :::: {.column width="60%"}
 ::: {.fragment .fade-in}
@@ -148,10 +144,7 @@ tidy <- df %>%
 ```
 :::
 ::::
-::::::::
-
-
-
+::::::
 
 ------------------------------------------------------------------------
 
@@ -222,3 +215,169 @@ tidy <- df %>%
 ------------------------------------------------------------------------
 
 ![](img/handson.png){fig-alt="manos a la obra" fig-align="center" width="751"}
+
+
+
+
+---------------------------------------------------------------------
+
+## Tipos de datos en R
+
+Dentro de las ciencias biológicas hay cuatro tipos de datos en R que podemos encontrar frecuentemente:
+
+1.   **Numéricos** (`1, 2, 3.15, 4.6843`)
+2.   **Interger** (`1L, 2L, 3L, 4L`)
+3.   **Lógicos** (`TRUE / FALSE`)
+4.   **Texto** (`"I love R"`)
+
+
+## Estructura de datos en R
+
+Hay cuatro estructuras de datos principales en R que son fundamentales para manejar y analizar datos:
+
+::: columns
+::: {.column .medium width="50%"}
+1.   **Vector**: Una secuencia de datos del mismo tipo (numérico, texto, lógico).
+2.   **Matriz**: Una tabla bidimensional de datos del mismo tipo.
+3.   **Data Frame**: Una tabla bidimensional de datos que pueden ser de diferentes tipos.
+4.   **Lista**: Una colección de objetos que pueden ser de diferentes tipos y estructuras.
+:::
+
+
+::: {.column width="50%"}
+![](img/data_structures.jpg){fig-align="center" width="600"}
+:::
+:::
+
+## Estructura de datos en R
+
+### Vectores
+
+```{r}
+
+v_numero <- c(1, 2, 3, 4, 5)
+v_numero
+```
+
+```{r}
+
+v_texto <- c("A", "B", "C", "D", "E")
+v_texto
+```
+
+
+
+![](img/data_structures.jpg){fig-align="center" width="600"}
+
+
+## Estructura de datos en R
+
+### Matrix
+
+```{r}
+m <- matrix(1:9, nrow = 3, ncol = 3)
+m
+
+```
+![](img/data_structures.jpg){fig-align="center" width="600"}
+
+
+## Estructura de datos en R
+
+### data.frame
+
+::: columns
+::: {.column .medium width="50%"}
+```{r}
+# dataframe combinando número, texto y lógico
+df <- data.frame(
+  id = c(1,2,3,4,5),
+  nombre = c("Ana", "Juan", "María", "Pedro", "Lucía"),
+  aprobado = c(TRUE, TRUE, FALSE, TRUE, FALSE)
+) 
+df
+```
+:::
+
+::: {.column width="50%"}
+
+![](img/data_structures.jpg){fig-align="center" width="600"}
+:::
+:::
+
+
+# Directorios de trabajo
+
+El directorio de trabajo [*working directory*]{.fragment .highlight-red} es la carpeta donde R busca archivos por defecto.
+
+Para saber en que carpeta estas trabajando, puedes usar el comando
+
+```{r}
+getwd()
+```
+
+y para establecer un directorio de trabajo.
+
+```{r}
+#| eval: false
+setwd()
+```
+
+------------------------------------------------------------------------
+
+::::: columns
+::: {.column width="50%"}
+![](img/jenny_fire1.jpeg)
+:::
+
+::: {.column width="50%"}
+![](img/jenny_fire2.jpeg)
+:::
+:::::
+
+Puedes leer la discusión [aqui](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/){target="_blank"}
+
+------------------------------------------------------------------------
+
+```{r}
+#| eval: false
+#| code-line-numbers: "|1,2,3,4,5|7,8"
+
+library(ggplot2)
+setwd("/Users/miguel/documentos/analisis/data")
+df <- read.delim("datos_crudos.csv")
+
+p <- ggplot(df, aes(x, y)) + geom_point()
+
+setwd("/Users/miguel/documentos/analisis/figuras")
+ggsave("figura_scatterplot.png")
+```
+
+La posibilidad de que esto tenga el efecto deseado en alguien mas es de 0%
+
+::: {.fragment .fade-in}
+![](img/better_way.jpg){fig-align="center" width="500"}
+:::
+
+# Flujos de trabajo en proyectos
+
+::::: columns
+::: {.column width="40%"}
+![](img/rproj_str.png){width="743"}
+:::
+
+::: {.column width="60%"}
+**Ventajas**:
+
+-   Facilita trabajar con rutas relativas
+-   Mantiene organizados tus scripts, figuras, tablas, etc.
+-   Mejora la reproducibilidad
+-   Evita el uso de `setwd()`
+:::
+:::::
+
+------------------------------------------------------------------------
+
+![](img/handson.png){fig-alt="manos a la obra" fig-align="center" width="751"}
+
+

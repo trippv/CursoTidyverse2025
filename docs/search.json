@@ -985,5 +985,47 @@
     "title": "Visualización de datos con ggplot2",
     "section": "Visualización de series; geom_ribbon()",
     "text": "Visualización de series; geom_ribbon()\nSi quisieramos representar de forma resumida el ejercicio anterior, podriamos mostrar el valor promedio en línea solida y las barrar de error en cada día. Otra opción es mostrar las barrar de error con un área sombreada. Para esto, podemos utilizar la geometría geom_ribbon().\nDe manera similar a las barras de erorr geom_ribbon() requiere los argumentos ymin y ymax los cuales pueden ser los valores calculados de desviación estándar, intervalos de confianza, mínimo y máximo, etc.\n\nggplot()+\n  geom_line(data = promedios_mo2, aes(x = dia, y = promedio_mo2, group = 1),\n            color = \"darkred\") +\n  geom_ribbon(data = promedios_mo2, \n             aes(x = dia, ymin = promedio_mo2 - desvest_mo2, \n                          ymax = promedio_mo2 + desvest_mo2,\n                 group = 1), fill = \"red\", alpha = 0.1, \n             color = \"grey64\",\n             linetype = \"dashed\")"
+  },
+  {
+    "objectID": "slides/introduccion.html#tipos-y-estructura-de-datos-en-r",
+    "href": "slides/introduccion.html#tipos-y-estructura-de-datos-en-r",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Tipos y estructura de datos en R",
+    "text": "Tipos y estructura de datos en R\nDentro de las ciencias biológicas hay cuatro tipos de datos en R que podemos encontrar frecuentemente:\n\nNuméricos (1, 2, 3.15, 4.6843)\nInterger (1L, 2L, 3L, 4L)\nLógicos (TRUE / FALSE)\nTexto (I love R)\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+  },
+  {
+    "objectID": "slides/introduccion.html#tipos-de-datos-en-r",
+    "href": "slides/introduccion.html#tipos-de-datos-en-r",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Tipos de datos en R",
+    "text": "Tipos de datos en R\nDentro de las ciencias biológicas hay cuatro tipos de datos en R que podemos encontrar frecuentemente:\n\nNuméricos (1, 2, 3.15, 4.6843)\nInterger (1L, 2L, 3L, 4L)\nLógicos (TRUE / FALSE)\nTexto (\"I love R\")"
+  },
+  {
+    "objectID": "slides/introduccion.html#estructura-de-datos-en-r",
+    "href": "slides/introduccion.html#estructura-de-datos-en-r",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Estructura de datos en R",
+    "text": "Estructura de datos en R\nHay cuatro estructuras de datos principales en R que son fundamentales para manejar y analizar datos:\n\n\n\nVector: Una secuencia de datos del mismo tipo (numérico, texto, lógico).\nMatriz: Una tabla bidimensional de datos del mismo tipo.\nData Frame: Una tabla bidimensional de datos que pueden ser de diferentes tipos.\nLista: Una colección de objetos que pueden ser de diferentes tipos y estructuras."
+  },
+  {
+    "objectID": "slides/introduccion.html#estructura-de-datos-en-r-1",
+    "href": "slides/introduccion.html#estructura-de-datos-en-r-1",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Estructura de datos en R",
+    "text": "Estructura de datos en R\nVectores\n\nv_numero &lt;- c(1, 2, 3, 4, 5)\nv_numero\n\n[1] 1 2 3 4 5\n\n\n\nv_texto &lt;- c(\"A\", \"B\", \"C\", \"D\", \"E\")\nv_texto\n\n[1] \"A\" \"B\" \"C\" \"D\" \"E\""
+  },
+  {
+    "objectID": "slides/introduccion.html#estructura-de-datos-en-r-2",
+    "href": "slides/introduccion.html#estructura-de-datos-en-r-2",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Estructura de datos en R",
+    "text": "Estructura de datos en R\nMatrix\n\nm &lt;- matrix(1:9, nrow = 3, ncol = 3)\nm\n\n     [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]    2    5    8\n[3,]    3    6    9"
+  },
+  {
+    "objectID": "slides/introduccion.html#estructura-de-datos-en-r-3",
+    "href": "slides/introduccion.html#estructura-de-datos-en-r-3",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Estructura de datos en R",
+    "text": "Estructura de datos en R\ndata.frame\n\n\n\n# dataframe combinando número, texto y lógico\ndf &lt;- data.frame(\n  id = c(1,2,3,4,5),\n  nombre = c(\"Ana\", \"Juan\", \"María\", \"Pedro\", \"Lucía\"),\n  aprobado = c(TRUE, TRUE, FALSE, TRUE, FALSE)\n) \ndf\n\n  id nombre aprobado\n1  1    Ana     TRUE\n2  2   Juan     TRUE\n3  3  María    FALSE\n4  4  Pedro     TRUE\n5  5  Lucía    FALSE"
   }
 ]

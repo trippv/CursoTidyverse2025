@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.53">
 
   <meta name="author" content="Miguel A. Tripp Valdez">
-  <meta name="dcterms.date" content="2025-09-15">
+  <meta name="dcterms.date" content="2025-09-16">
   <title>Tidyverse – Análisis de datos con Tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -97,7 +97,7 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="styles/custom.scss">
+  <link rel="stylesheet" href="../styles/custom.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -406,7 +406,7 @@ Miguel A. Tripp Valdez
     </div>
 </div>
 
-  <p class="date">2025-09-15</p>
+  <p class="date">2025-09-16</p>
 </section>
 <section id="sobre-mi" class="slide level2">
 <h2>Sobre mi</h2>
@@ -567,6 +567,166 @@ Miguel A. Tripp Valdez
 </section>
 <section class="slide level2">
 
+
+<img data-src="img/handson.png" class="quarto-figure quarto-figure-center r-stretch" alt="manos a la obra" width="751"></section>
+<section id="tipos-de-datos-en-r" class="slide level2">
+<h2>Tipos de datos en R</h2>
+<p>Dentro de las ciencias biológicas hay cuatro tipos de datos en R que podemos encontrar frecuentemente:</p>
+<ol type="1">
+<li><strong>Numéricos</strong> (<code>1, 2, 3.15, 4.6843</code>)</li>
+<li><strong>Interger</strong> (<code>1L, 2L, 3L, 4L</code>)</li>
+<li><strong>Lógicos</strong> (<code>TRUE / FALSE</code>)</li>
+<li><strong>Texto</strong> (<code>"I love R"</code>)</li>
+</ol>
+</section>
+<section id="estructura-de-datos-en-r" class="slide level2">
+<h2>Estructura de datos en R</h2>
+<p>Hay cuatro estructuras de datos principales en R que son fundamentales para manejar y analizar datos:</p>
+<div class="columns">
+<div class="column medium" style="width:50%;">
+<ol type="1">
+<li><strong>Vector</strong>: Una secuencia de datos del mismo tipo (numérico, texto, lógico).</li>
+<li><strong>Matriz</strong>: Una tabla bidimensional de datos del mismo tipo.</li>
+<li><strong>Data Frame</strong>: Una tabla bidimensional de datos que pueden ser de diferentes tipos.</li>
+<li><strong>Lista</strong>: Una colección de objetos que pueden ser de diferentes tipos y estructuras.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/data_structures.jpg" class="quarto-figure quarto-figure-center" width="600"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="estructura-de-datos-en-r-1" class="slide level2">
+<h2>Estructura de datos en R</h2>
+<h3 id="vectores">Vectores</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>v_numero <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb5-2"><a></a>v_numero</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>v_texto <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>)</span>
+<span id="cb7-2"><a></a>v_texto</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C" "D" "E"</code></pre>
+</div>
+</div>
+
+<img data-src="img/data_structures.jpg" class="quarto-figure quarto-figure-center r-stretch" width="600"></section>
+<section id="estructura-de-datos-en-r-2" class="slide level2">
+<h2>Estructura de datos en R</h2>
+<h3 id="matrix">Matrix</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb9-2"><a></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+</div>
+</div>
+
+<img data-src="img/data_structures.jpg" class="quarto-figure quarto-figure-center r-stretch" width="600"></section>
+<section id="estructura-de-datos-en-r-3" class="slide level2">
+<h2>Estructura de datos en R</h2>
+<h3 id="data.frame">data.frame</h3>
+<div class="columns">
+<div class="column medium" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># dataframe combinando número, texto y lógico</span></span>
+<span id="cb11-2"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-3"><a></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb11-4"><a></a>  <span class="at">nombre =</span> <span class="fu">c</span>(<span class="st">"Ana"</span>, <span class="st">"Juan"</span>, <span class="st">"María"</span>, <span class="st">"Pedro"</span>, <span class="st">"Lucía"</span>),</span>
+<span id="cb11-5"><a></a>  <span class="at">aprobado =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb11-6"><a></a>) </span>
+<span id="cb11-7"><a></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id nombre aprobado
+1  1    Ana     TRUE
+2  2   Juan     TRUE
+3  3  María    FALSE
+4  4  Pedro     TRUE
+5  5  Lucía    FALSE</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/data_structures.jpg" class="quarto-figure quarto-figure-center" width="600"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section>
+<section id="directorios-de-trabajo" class="title-slide slide level1 center">
+<h1>Directorios de trabajo</h1>
+<p>El directorio de trabajo <span class="fragment highlight-red"><em>working directory</em></span> es la carpeta donde R busca archivos por defecto.</p>
+<p>Para saber en que carpeta estas trabajando, puedes usar el comando</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C:/Users/migue/OneDrive/Documentos/Cursos/Taller_Tidyverse_CIBNOR_2023/CursoTidyverse2025/slides"</code></pre>
+</div>
+</div>
+<p>y para establecer un directorio de trabajo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">setwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="img/jenny_fire1.jpeg"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="img/jenny_fire2.jpeg"></p>
+</div></div>
+<p>Puedes leer la discusión <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/" target="_blank">aqui</a></p>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="|1,2,3,4,5|7,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-2"><a></a><span class="fu">setwd</span>(<span class="st">"/Users/miguel/documentos/analisis/data"</span>)</span>
+<span id="cb16-3"><a></a>df <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"datos_crudos.csv"</span>)</span>
+<span id="cb16-4"><a></a></span>
+<span id="cb16-5"><a></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb16-6"><a></a></span>
+<span id="cb16-7"><a></a><span class="fu">setwd</span>(<span class="st">"/Users/miguel/documentos/analisis/figuras"</span>)</span>
+<span id="cb16-8"><a></a><span class="fu">ggsave</span>(<span class="st">"figura_scatterplot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La posibilidad de que esto tenga el efecto deseado en alguien mas es de 0%</p>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/better_way.jpg" class="quarto-figure quarto-figure-center" width="500"></p>
+</figure>
+</div>
+</div>
+</section></section>
+<section>
+<section id="flujos-de-trabajo-en-proyectos" class="title-slide slide level1 center">
+<h1>Flujos de trabajo en proyectos</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="img/rproj_str.png" width="743"></p>
+</div><div class="column" style="width:60%;">
+<p><strong>Ventajas</strong>:</p>
+<ul>
+<li>Facilita trabajar con rutas relativas</li>
+<li>Mantiene organizados tus scripts, figuras, tablas, etc.</li>
+<li>Mejora la reproducibilidad</li>
+<li>Evita el uso de <code>setwd()</code></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/handson.png" class="quarto-figure quarto-figure-center" alt="manos a la obra" width="751"></p>
@@ -576,10 +736,10 @@ Miguel A. Tripp Valdez
 <div class="quarto-auto-generated-content">
 <p><img src="img/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p><a href="https://trippv.github.io/CursoTidyverse2023/">Análisis de datos con Tidyverse</a></p>
+<p><a href="https://trippv.github.io/CursoTidyverse2025/">Análisis de datos con Tidyverse</a></p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
