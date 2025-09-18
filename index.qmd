@@ -8,6 +8,8 @@ Instructores: [Miguel A. Tripp Valdez](https://migueltrippcv.netlify.app/)
 
 ------------------------------------------------------------------------
 
+![](img/tidyverse_banner.png){fig-align="center" width="626"}
+
 **Tidyverse** es un conjunto de paquetes dentro del ambiente R que comparten una misma filosofía y gramática lo que facilita la organización, transformación y visualización de datos tabulares.
 
 ::: {.callout-tip icon="false"}
@@ -16,17 +18,21 @@ Instructores: [Miguel A. Tripp Valdez](https://migueltrippcv.netlify.app/)
 Que el alumno adquiera habilidades prácticas para importar, explorar, transformar, limpiar y visualizar datos mediante herramientas del Tidyverse, fomentando buenas prácticas de análisis reproducible en R.
 :::
 
-#### Requisitos
+
+::: {.callout-warning icon="false"}
+## Requisitos
 
 -   Tener experiencia mínima en el uso de R
 
 -   Tener computadora personal y acceso a internet
+:::
+
 
 ## Temario del curso
 
 ::: {.table .table-bordered .table-hover .table-striped .align-left .text-left}
 | Día | Hora | Tema |   |   |
-|--------------|--------------|----------------|--------------|--------------|
+|---------------|---------------|---------------|---------------|---------------|
 | Lunes | 09:00 - 11:30 | [Introducción a R y Tidyverse](https://trippv.github.io/CursoTidyverse2025/1_Introduccion.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/introduccion.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
 |  |  | [Rstudio y R base](https://trippv.github.io/CursoTidyverse2025/2_RBasico.html) |  |  |
 |  |  | [Proyectos en Rstudio y PositCloud](https://trippv.github.io/CursoTidyverse2025/3_Proyectos.html) |  |  |
