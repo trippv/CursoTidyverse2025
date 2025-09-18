@@ -333,7 +333,7 @@
     "href": "index.html#temario-del-curso",
     "title": "Análisis de datos con Tidyverse",
     "section": "Temario del curso",
-    "text": "Temario del curso\n\n\n\n\nDía\nHora\nTema\n\n\n\n\n\n\nLunes\n09:00 - 11:30\nIntroducción a R y Tidyverse\n\n\n\n\n\n\nRstudio y R base\n\n\n\n\n\n\nProyectos en Rstudio y PositCloud\n\n\n\n\n\n11:45 - 14:00\nImportar datos\n\n\n\n\nMartes\n09:00 - 14:00\nManipulación de datos con Dplyr\n\n\n\n\nMiércoles\n09:00 - 14:00\nVisualización con ggplot2\n\n\n\n\nJueves\n09:00 - 11:30\nVisualización con ggplot2; Edición\n\n\n\n\n\n11:45 - 14:00\nCombinar gráficos con Patchwork\n\n\n\n\n\n\nggplot sin código\n\n\n\n\nViernes\n09:00 - 11:30\nManipulacion de tablas\n\n\n\n\n\n11:45 - 14:00\nSeries de tiempo con Lubridate"
+    "text": "Temario del curso\n\n\n\n\nDía\nHora\nTema\n\n\n\n\n\n\nLunes\n09:00 - 11:15\nIntroducción a R y Tidyverse\n\n\n\n\n\n\nRstudio y R base\n\n\n\n\n\n\nProyectos en Rstudio y PositCloud\n\n\n\n\n\n11:30 - 13:00\nImportar datos\n\n\n\n\nMartes\n09:00 - 13:00\nManipulación de datos con Dplyr\n\n\n\n\nMiércoles\n09:00 - 13:00\nVisualización con ggplot2\n\n\n\n\nJueves\n09:00 - 11:15\nVisualización con ggplot2; Edición\n\n\n\n\n\n11:30 - 13:00\nCombinar gráficos con Patchwork\n\n\n\n\n\n\nggplot sin código\n\n\n\n\nViernes\n09:00 - 11:15\nManipulacion de tablas\n\n\n\n\n\n11:30 - 13:00\nSeries de tiempo con Lubridate"
   },
   {
     "objectID": "9_Union.html",
