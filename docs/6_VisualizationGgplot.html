@@ -1240,7 +1240,7 @@ Warning
 <h3 class="anchored" data-anchor-id="visualización-de-series-geom_line">Visualización de series; geom_line()</h3>
 <p>Un gráfico de líneas es una representación visual de datos que muestra la relación entre dos variables, donde una variable se representa en el eje x y la otra en el eje y. Los puntos de datos se conectan mediante líneas para mostrar tendencias o patrones a lo largo del tiempo o de otra variable continua.</p>
 <p>En ggplot <code>geom_line()</code> permite graficar líneas conectando puntos, donde el <em>aesthetics</em> <code>group</code> nos permite definir que observaciones estan conectadas.</p>
-<p>Para entender mejor esta geometría, utilizaremos el archivo <code>respiracion.csv</code>dentro de la carpeta <code>data</code> el cual contiene valores de consumo de oxígeno diario en un molusco marino bajo dos condiciones experimentales: <strong>Control</strong> y <strong>Tratamiento</strong>.</p>
+<p>Para entender mejor esta geometría, utilizaremos el archivo <code>respiracion_long.csv</code>dentro de la carpeta <code>data</code> el cual contiene valores de consumo de oxígeno diario en un molusco marino bajo dos condiciones experimentales: <strong>Control</strong> y <strong>Tratamiento</strong>.</p>
 <p>Por el momento, vamos a filtrar los datos para quedarnos con la experimento <strong>Control</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>respiracion <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respiracion_long.csv"</span>)</span>

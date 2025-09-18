@@ -96,6 +96,67 @@ table4a %>%
   pivot_longer(-country, names_to = "year", values_to = "population")
 ```
 
+
+
+::::: {.callout-caution icon="false"}
+# Ejercicio: Respiración
+
+En el archivo `respiracion.csv` puedes encontrar datos de consumo de oxígeno de diversos organismos expuestos a dos condiciones experimentales (*"Control"* y *"Experimental"*). Abre el archivo y modifica la tabla para que puedas calcular el **promedio diario** del consumo de oxígeno y graficalo.
+
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+#| message: false
+#| warning: false
+
+respiracion <- read_csv("data/respiracion.csv")
+
+respiracion_plot <- respiracion %>%  
+  pivot_longer(c(-individuo, -experimento), 
+               names_to = "dia", 
+               values_to = "respiracion") %>%  
+  group_by(experimento, dia) %>% 
+  summarise(respiracion_promedio = mean(respiracion, 
+                                        na.rm = TRUE)) %>%  
+  ungroup() |> 
+  ggplot(aes(x = dia, 
+             y = respiracion_promedio, 
+             group = experimento, 
+             color = experimento))+
+  geom_line()
+  
+respiracion_plot
+```
+:::::
+
+
+:::{.callout-tip}
+# Argumentos adicionales en `pivot_longer()`
+
+En el ejemplo anterior, creamos la variable "dia" el cual contiene los valores "dia1", "dia2", "dia3", etc. Si queremos que la variable solo contenga el número del día, podemos usar el parámetro `names_prefix` para eliminar una cadena de caracteres para convertir el tipo de variable. 
+
+
+```{r}
+respiracion_largo <- respiracion %>% 
+  pivot_longer(cols = c(-individuo, -experimento), 
+             names_to = "dia", 
+             values_to = "respiracion", 
+             names_prefix = "dia") 
+
+respiracion_largo
+
+```
+
+
+Observa que aunque tengamos un valor numérico, la variable `dia` es de tipo carácter. Si queremos convertirla a numérica, podemos usar el parámetro `names_transform = list(dia = as.integer)`
+
+:::
+
+
+
 ## `pivot_wider()`
 
 `pivot_wider()` es lo opuesto de `pivot_longer()`. Se utiliza cuando las observaciones están dispersas en varias filas. `table2` constituye un ejemplo de esto: una observación es un país en un año, pero cada observación esta dispersa en dos filas.
@@ -119,58 +180,35 @@ table2 %>%
 
 ```
 
-::::: {.callout-caution icon="false"}
-# Ejercicio: Respiración
-
-En el siguiente enlace puedes encontrar datos de consumo de oxígeno de diversos organismos expuestos a dos condiciones experimentales (*"Control"* y *"Experimental"*). Abre el archivo y modifica la tabla para que puedas calcular el promedio diario del consumo de oxígeno y graficalo.
-
-:::: column-margin
-::: callout-tip
-Para importar una base de datos que se encuentra en un sitio remoto, simplemente puedes ingresar la ruta (http:www//...) entre comillas dentro de la función para importar los datos (p. ej `read_csv()`).
+De esta manera, podemos restablecer la tabla de `respiracion.csv` a su formato original
 
 ```{r}
-#| eval: false
-
-www <- "https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/respiracion.csv"
-
-df <- read_csv(www)
+respiracion_largo %>% 
+  pivot_wider(names_from = "dia", 
+              values_from = "respiracion", 
+              names_glue = "dia_{dia}")
 ```
-:::
-::::
 
-```{r}
-#| include: true
-#| code-fold: true
-#| code-summary: "ver codigo"
-#| eval: false
 
-respiracion <- read_csv("https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/respiracion.csv")
 
-respiracion %>%  
-  pivot_longer(c(-individuo, -experimento), names_to = "dia", values_to = "respiracion") %>%  
-  group_by(experimento, dia) %>% 
-  summarise(respiracion_promedio = mean(respiracion, 
-                                        na.rm = TRUE)) %>%  
-  ungroup() |> 
-  ggplot(aes(x = dia, 
-             y = respiracion_promedio, 
-             group = experimento, 
-             color = experimento))+
-  geom_line()
-```
-:::::
 
 # Unir tablas (`_join()`)
 
 Dentro de los análisis, es muy común que tengamos que unir dos o mas tablas distintas que se relacionen entre ellas por uno o mas elementos en común. Por ejemplo, podemos unir una lista de genes expresados diferencialmente en un análisis transcriptómico con sus valores de abundancia, los cuales se encuentran en objetos diferentes. O podemos unir información de grupos taxonómicos que se encuentren en objetivos diferentes y que se unan por el nombre o identificador de una especie.
 
-`Dplyr` tiene diversas herramientas para unir tablas. Entre las funciones mas comunes tenemos:
+
+Las formas mas sencillas y directas de unir tablas son con funciones base como `cbind()` o `rbind()`, pero estas funciones requieren que ambas tablas tengan el mismo número de filas o columnas, respectivamente. En la mayoría de los casos, las tablas que queremos unir no cumplen con esta condición, por lo que es necesario utilizar funciones mas flexibles.
+
+
+Por otro lado, `Tidyverse` y particularmente la librería `Dplyr` tiene funciones mas eficientes para unir tablas a partir de una variable común entre ellas. 
+
+Todos tienen la misma interfaz: toman un par de marcos de datos (*x* , *y*) y devuelven un marco de datos. El orden de las filas y columnas en la salida está determinado principalmente por *x*.
 
 -   `inner_join()`: Esta función combina dos tablas (data frames) manteniendo solo las filas que tienen una coincidencia en ambas tablas en función de las columnas especificadas. Las filas que no tienen coincidencias en ambas tablas se descartan del resultado final.
 
--   `left_join()`: Une dos tablas conservando todas las filas de la tabla izquierda y las filas coincidentes de la tabla derecha. Si una fila de la tabla izquierda no tiene una coincidencia en la tabla derecha, se llenará con valores NA (missing values) en las columnas de la tabla derecha.
+-   `left_join()`: Une dos tablas conservando todas las filas de la tabla izquierda (x) y las filas coincidentes de la tabla derecha (y). 
 
--   `right_join()`: Es similar a left_join, pero conserva todas las filas de la tabla derecha y las filas coincidentes de la tabla izquierda. Las filas de la tabla derecha que no tienen una coincidencia en la tabla izquierda se llenan con valores NA en las columnas de la tabla izquierda.
+-   `right_join()`: Es similar a left_join(), pero conserva todas las filas de la tabla derecha (y) y las filas coincidentes de la tabla izquierda (x). 
 
 -   `full_join()`: Esta función une dos tablas manteniendo todas las filas de ambas tablas. Si una fila tiene una coincidencia en la otra tabla, se incluirá en el resultado final. Si no hay una coincidencia para una fila en alguna de las tablas, se llenarán las columnas correspondientes con valores NA en el resultado final.
 

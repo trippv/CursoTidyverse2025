@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.53">
 
   <meta name="author" content="Miguel A. Tripp Valdez">
-  <title>Tidyverse – dplyr</title>
+  <title>Tidyverse – Tidyr y manipulación de tablas</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -386,17 +386,13 @@
       margin-right: 0; 
     }
   </style>
-  <link href="../site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
-
-  <script src="../site_libs/countdown-0.4.0/countdown.js"></script>
-
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" data-background-image="img/tidyverse_cover.png" data-background-opacity="0.4" data-background-size="cover" class="quarto-title-block center">
-  <h1 class="title">dplyr</h1>
+  <h1 class="title">Tidyr y manipulación de tablas</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -410,318 +406,671 @@ Miguel A. Tripp Valdez
 </div>
 
 </section>
-<section id="dplyr" class="slide level2">
-<h2>Dplyr</h2>
-<p>Paquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:</p>
+<section class="slide level2">
+
 <div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/dplyr.png" class="quarto-figure quarto-figure-center" width="350"></p>
-</figure>
-</div>
-</div><div class="column" style="width:70%;">
-<ul>
-<li><p><code>select()</code></p></li>
-<li><p><code>filter()</code></p></li>
-<li><p><code>mutate()</code></p></li>
-<li><p><code>group_by()</code></p></li>
-<li><p><code>summarise()</code></p></li>
-</ul>
-</div></div>
-</section>
-<section id="base-de-datos" class="slide level2">
-<h2>Base de datos</h2>
-<p>Base de datos de Pokémon obtenida de <a href="https://www.kaggle.com/datasets/rounakbanik/pokemon">Kaggle</a>. La base de datos contiene la siguiente información:</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pokemon_log.png" style="margin-top:5em;" width="250"></p>
-</div><div class="column smaller" style="width:70%;">
-<ul>
-<li><strong>pokedex number</strong>: Número de identificador</li>
-<li><strong>Name</strong>: Nombre de cada Pokémon<br>
-</li>
-<li><strong>Type</strong>: Tipo de Pokémon</li>
-<li><strong>HP</strong>: Hit Points, define qué tanto daño puede tolerar<br>
-</li>
-<li><strong>Attack</strong>: Ataque<br>
-</li>
-<li><strong>Defense</strong>: Defensa<br>
-</li>
-<li><strong>SP Atk</strong>: Ataque especial<br>
-</li>
-<li><strong>SP Def</strong>: Defensa especial<br>
-</li>
-<li><strong>Speed</strong>: Velocidad. Determina cuál Pokémon ataca primero en cada ronda<br>
-</li>
-<li><strong>Weight</strong>: Peso en kg<br>
-</li>
-<li><strong>Generation</strong>: A cuál generación pertenece<br>
-</li>
-<li><strong>is legendary</strong>: Si es legendario o no</li>
-</ul>
-</div></div>
-</section>
-<section id="ejercicio" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="quien-es-ese-pokemon">¿Quien es ese pokemon? ❗💥</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><p>valor de HP entre 100 y 200</p></li>
-<li><p>valor de velocidad menor a 50</p></li>
-<li><p>es del tipo1 Normal</p></li>
-<li><p>valor de defensa menor a 40</p></li>
-<li><p>pertenece a la primera generación</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/clipboard-486799225.png" width="510"></p>
-</div></div>
+<div class="column smaller" style="width:33.33%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_2ab3b1e0" data-warn-when="10" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+<table class="caption-top">
+<caption>tabla 1</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</div>
-</section>
-<section id="ejercicio-1" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="en-una-galaxía-muy-lejana">En una galaxía muy lejana…</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/jabba.jpg" class="quarto-figure quarto-figure-center" width="358"></p>
-</figure>
-</div>
-</div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>starwars</code> que se encuentra en el directorio de <em>databases</em> y genera los siguientes objetos:</p>
-<p><strong>Parte I:</strong></p>
-<ol type="1">
-<li>Una tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.</li>
-<li>Una tabla que incluya solamente los personajes femeninos del planeta Naboo.</li>
-<li>Una tabla con los personajes que hayan aparecido en <em>Attack of the Clones</em>.</li>
-</ol>
-</div></div>
-</section>
-<section id="ejercicio-2" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="en-una-galaxía-muy-lejana-1">En una galaxía muy lejana…</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/jabba.jpg" class="quarto-figure quarto-figure-center" width="358"></p>
-</figure>
-</div>
-</div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>starwars</code> que se encuentra en el directorio de <em>databases</em> y genera los siguientes objetos:</p>
-<p><strong>Parte II:</strong></p>
-<p>Genera un solo objeto donde realices lo siguiente:</p>
-<ol type="1">
-<li>Selecciona las columnas <code>name</code>, <code>height</code>, <code>mass</code>, <code>sex</code>, <code>gender</code>.</li>
-<li>Cambia el nombre de las columnas por <em>“nombre”, “altura”, “masa”, “sexo”, “genero”</em>.</li>
-<li>Calcula la relación masa/altura</li>
-<li>Filtra los individuos con una relación masa/altura &gt; 1</li>
-</ol>
-</div></div>
-</section>
-<section id="el-operador-pipe" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Permite aplicar una serie de funciones secuenciales a un objeto</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pipe.png"></p>
-<p><span class="smaller">El operador originalmente viene del paquete <code>magrittr</code>, nombrado asi por René Magritte</span></p>
-</div></div>
-<div class="column smaller" style="width:70;">
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>R base</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">head</span>(<span class="fu">select</span>(<span class="fu">filter</span>(pokemon, attack <span class="sc">&lt;</span> <span class="dv">100</span>), name, attack))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><p>:::</p>
-</section>
-<section id="el-operador-pipe-1" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Permite aplicar una serie de funciones secuenciales a un objeto</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pipe.png"></p>
-<p><span class="smaller">El operador originalmente viene del paquete <code>magrittr</code>, nombrado asi por René Magritte</span></p>
-</div></div>
-<div class="column smaller" style="width:70;">
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>R base</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">head</span>(<span class="fu">select</span>(<span class="fu">filter</span>(pokemon, </span>
-<span id="cb2-2"><a></a>                   attack <span class="sc">&lt;</span> <span class="dv">100</span>), </span>
-<span id="cb2-3"><a></a>            name, attack)</span>
-<span id="cb2-4"><a></a>     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><p>:::</p>
-</section>
-<section id="el-operador-pipe-2" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Permite aplicar una serie de funciones secuenciales a un objeto</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pipe.png"></p>
-<p><span class="smaller">El operador originalmente viene del paquete <code>magrittr</code>, nombrado asi por René Magritte</span></p>
-</div></div>
-<div class="column smaller" style="width:70;">
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>R base</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">head</span>(<span class="fu">select</span>(<span class="fu">filter</span>(pokemon, </span>
-<span id="cb3-2"><a></a>                   attack <span class="sc">&lt;</span> <span class="dv">100</span>), </span>
-<span id="cb3-3"><a></a>            name, attack)</span>
-<span id="cb3-4"><a></a>     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>Tidyverse</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>pokemon <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a></a>  <span class="fu">select</span>(name, attack) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a></a>  <span class="fu">fitler</span>(attack <span class="sc">&lt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><p>:::</p>
-</section>
-<section id="el-operador-pipe-y-luego" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
+</div><div class="column smaller" style="width:33.33%;">
 
-<img data-src="img/pipe1.png" class="quarto-figure quarto-figure-center r-stretch" width="790"></section>
-<section id="el-operador-pipe-y-luego-1" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
+</div><div class="column smaller" style="width:33.33%;">
 
-<img data-src="img/pipe2.png" class="quarto-figure quarto-figure-center r-stretch" width="790"></section>
-<section id="el-operador-pipe-y-luego-2" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-
-<img data-src="img/pipe3.png" class="quarto-figure quarto-figure-center r-stretch" width="790"></section>
-<section id="el-operador-pipe-y-luego-3" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-
-<img data-src="img/pipe4.png" class="quarto-figure quarto-figure-center r-stretch" width="1040"></section>
-<section id="el-operador-pipe-y-luego-4" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">salgo_casa</span>(</span>
-<span id="cb5-2"><a></a>  <span class="fu">visto</span>(</span>
-<span id="cb5-3"><a></a>    <span class="fu">salgo_cama</span>(</span>
-<span id="cb5-4"><a></a>      <span class="fu">despierto</span>(yo)</span>
-<span id="cb5-5"><a></a>    )</span>
-<span id="cb5-6"><a></a>  )</span>
-<span id="cb5-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="el-operador-pipe-y-luego-5" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">despierto</span>(yo)</span>
-<span id="cb6-2"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">salgo_cama</span>(yo)</span>
-<span id="cb6-3"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">visto</span>(yo)</span>
-<span id="cb6-4"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">salgo_casa</span>(yo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="el-operador-pipe-y-luego-6" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>yo <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a></a>  <span class="fu">despierto</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a></a>  <span class="fu">salgo_cama</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-4"><a></a>  <span class="fu">visto</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-5"><a></a>  <span class="fu">salgo_casa</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="el-operador-pipe-3" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Desde su versión 4.1.0, R incluye un pipe nativo <code>|&gt;</code>. El comportamiento de ambos pipes es en gran medida el mismo, permitiendo expresar una secuencia de operaciones a un objeto.</p>
-
-<img data-src="img/catsup_pipes.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="ejercicio-3" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="palmer-penguins">Palmer penguins</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Palmer.png" class="quarto-figure quarto-figure-center"></p>
-</figure>
-</div>
-</div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>palmer_penguis.csv</code> que se encuentra en el directorio de databases y utilizando pipes genera los siguientes objetos:</p>
-<ol type="1">
-<li><p>Un objeto con los pingüinos de la especie <strong>Adelie</strong> y que incluya una columna con la proporción (ratio) entre la longitud y profundidad del pico.</p></li>
-<li><p>Un objeto solamente los individuos hembras y que solamente contenta las columnas de especie, isla y peso corporal <strong>en Kg</strong>.</p></li>
-<li><p>Un objeto que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a <strong>4 Kg</strong>. <span class="fragment highlight-red">Convierte la columna isla a factor.</span></p></li>
-</ol>
 </div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column smaller" style="width:33.33%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_cfe36d2b" data-warn-when="10" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+<table class="caption-top">
+<caption>tabla 1</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column smaller" style="width:33.33%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>tabla2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">745</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">2666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">37737</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">80488</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">212258</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">213766</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column smaller" style="width:33.33%;">
+
+</div></div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column smaller" style="width:33.33%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>tabla 1</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column smaller" style="width:33.33%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>tabla2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">745</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">2666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">37737</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">80488</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">212258</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">213766</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column smaller" style="width:33.33%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>tabla4a: casos</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">1999</th>
+<th style="text-align: right;">2000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">2666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">80488</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">213766</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>tabla4b: población</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">1999</th>
+<th style="text-align: right;">2000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">19987071</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">172006362</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1272915272</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></div>
+</section>
+<section id="tidy-data" class="slide level2">
+<h2>Tidy data</h2>
+<ul>
+<li>Cada variable debe tener su propia columna.</li>
+<li>Cada observación debe tener su propia fila.</li>
+<li>Cada valor debe tener su propia celda.</li>
+</ul>
+
+<img data-src="img/tidydata.png" class="r-stretch"></section>
+<section id="tidy-data-1" class="slide level2">
+<h2>Tidy data</h2>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Desafio</strong></p>
+</div>
+<div class="callout-content">
+<p>Intenta calcular la <code>tasa</code> (casos / población) por país y por año en cada una de las tabla. ¿En cual de ellas es mas fácil?</p>
 </div>
 </div>
 </div>
 </section>
-<section id="ejercicio-4" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="tiburon-a-la-vista">Tiburon a la vista!</h3>
+<section id="tidy-data-2" class="slide level2">
+<h2>Tidy data</h2>
+<div class="smaller">
+<table class="caption-top">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Especie</th>
+<th>Sitio</th>
+<th>Altura_ene</th>
+<th>Altura_Feb</th>
+<th>Altura_Mar</th>
+<th>NumHojas_Ene</th>
+<th>NumHojas_Feb</th>
+<th>Numhojas_Mar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pino</td>
+<td>Bosque</td>
+<td>12</td>
+<td>15</td>
+<td>18</td>
+<td>30</td>
+<td>35</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<td>Pino</td>
+<td>Pradera</td>
+<td>10</td>
+<td>12</td>
+<td>14</td>
+<td>28</td>
+<td>32</td>
+<td>34</td>
+</tr>
+<tr class="odd">
+<td>Roble</td>
+<td>Bosque</td>
+<td>20</td>
+<td>24</td>
+<td>28</td>
+<td>40</td>
+<td>45</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td>Roble</td>
+<td>Pradera</td>
+<td>18</td>
+<td>20</td>
+<td>22</td>
+<td>35</td>
+<td>38</td>
+<td>42</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<img data-src="img/tidyup.gif" class="quarto-figure quarto-figure-center r-stretch" width="590"></section>
+<section id="tidy-data-3" class="slide level2">
+<h2>Tidy data</h2>
+<p>Para arreglar estos problemas en el formato de los datos tabulados, vamos a necesitar de dos de las funciones mas importante de tidyr: <code>pivot_longer()</code> y <code>pivot_wider()</code></p>
+
+<img data-src="img/ross_pivot.gif" class="quarto-figure quarto-figure-center r-stretch" width="457"></section>
+<section id="pivot_longer" class="slide level2">
+<h2>pivot_longer()</h2>
+
+<img data-src="img/pivot_longer_2.png" class="r-stretch"></section>
+<section id="ejercicio-respiración" class="slide level2">
+<h2>Ejercicio: Respiración</h2>
+<p>En el archivo <code>respiracion.csv</code> puedes encontrar datos de consumo de oxígeno de diversos organismos expuestos a dos condiciones experimentales (<em>“Control”</em> y <em>“Experimental”</em>). Abre el archivo y modifica la tabla para que puedas calcular el <strong>promedio diario</strong> del consumo de oxígeno y graficalo.</p>
+</section>
+<section id="ejercicio-respiración-1" class="slide level2">
+<h2>Ejercicio: Respiración</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>respiracion <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/respiracion.csv"</span>))</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>respiracion_plot <span class="ot">&lt;-</span> respiracion <span class="sc">%&gt;%</span>  </span>
+<span id="cb1-4"><a></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="sc">-</span>individuo, <span class="sc">-</span>experimento), </span>
+<span id="cb1-5"><a></a>               <span class="at">names_to =</span> <span class="st">"dia"</span>, </span>
+<span id="cb1-6"><a></a>               <span class="at">values_to =</span> <span class="st">"respiracion"</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb1-7"><a></a>  <span class="fu">group_by</span>(experimento, dia) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a></a>  <span class="fu">summarise</span>(<span class="at">respiracion_promedio =</span> <span class="fu">mean</span>(respiracion, </span>
+<span id="cb1-9"><a></a>                                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb1-10"><a></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-11"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dia, </span>
+<span id="cb1-12"><a></a>             <span class="at">y =</span> respiracion_promedio, </span>
+<span id="cb1-13"><a></a>             <span class="at">group =</span> experimento, </span>
+<span id="cb1-14"><a></a>             <span class="at">color =</span> experimento))<span class="sc">+</span></span>
+<span id="cb1-15"><a></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb1-16"><a></a>  </span>
+<span id="cb1-17"><a></a>respiracion_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="tidyr_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="pivot_wider" class="slide level2">
+<h2>pivot_wider()</h2>
+
+<img data-src="img/pivot_wider_2.png" class="r-stretch"></section>
+<section id="unir-tablas" class="slide level2">
+<h2>Unir tablas</h2>
+<p>Todos tienen la misma interfaz: toman un par de marcos de datos (<em>x</em> , <em>y</em>) y devuelven un marco de datos. El orden de las filas y columnas en la salida está determinado principalmente por <em>x</em>.</p>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column smaller" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/sharky.jpeg" class="quarto-figure quarto-figure-center" width="484"></p>
+<p><img data-src="img/joins.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>attacks.csv</code> que se encuentra en el directorio <strong>databases</strong>. Explora los datos que contiene y realiza lo siguiente:</p>
-<ol type="1">
-<li><p>Limpia el nombre de las columnas</p></li>
-<li><p>Filtra los registros que se tengan a partir del siglo XIX</p></li>
-</ol>
-<p>Con esta nueva tabla y usando las herramientas vista al momento, contesta lo siguiente:</p>
 <ul>
-<li>¿Que país tiene el mayor número de registros de ataque?</li>
-<li>¿Que actividad tiene el mayor número de registros?</li>
-<li>¿Que actividad tiene el mayor número de registros con resultado fatal?</li>
-<li>¿Que país tiene el mayor número de registros de tiburón blanco?</li>
+<li><p>left_join(): conserva todas las filas de x. Si alguna clave de x no encuentra coincidencia en y, se rellena con NA en las columnas de y.</p></li>
+<li><p>right_join(): conserva todas las filas de y. Si alguna clave de y no encuentra coincidencia en x, se rellena con NA en las columnas de x.</p></li>
+<li><p>full_join(): conserva todas las filas de x y de y. Si alguna clave no tiene coincidencia en la otra tabla, se completan las columnas faltantes con NA.</p></li>
+<li><p>inner_join(): conserva solo las filas con claves que coinciden en ambas tablas.</p></li>
 </ul>
 </div></div>
 </section>
-<section id="ejercicio-5" class="slide level2 smaller">
-<h2>Ejercicio:</h2>
-<p>A continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (<code>body_mass_g</code>) y el tamaño de la aleta (<code>flipper_length_mm</code>) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:</p>
+<section id="unir-tablas-1" class="slide level2">
+<h2>Unir tablas</h2>
+<p>Otra forma de verlo…</p>
+
+<img data-src="img/joins_venn.png" class="quarto-figure quarto-figure-center r-stretch" width="860"></section>
+<section id="ejercicio-pokéfusion" class="title-slide slide level1 center">
+<h1>Ejercicio: Pokéfusion</h1>
+<div class="columns">
+<div class="column medium" style="width:75%;">
+<p>Abre las tablas de <code>pokemon.csv</code> y <code>pokemon_extended.csv</code> que se encuentran en la carpeta de <code>data</code>.</p>
+<p>Usando una sola cadena, une ambas tablas de manera que se retengan todos los individuos con información en ambas tablas</p>
+<ul>
+<li>¿Que pasa si no defines la variable de unión <code>by =</code>?</li>
+<li>¿Que problema encuentras con el nombre de la variable de unión?</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># a </span></span>
-<span id="cb8-2"><a></a><span class="fu">arrange</span>(aleta_peso_ratio_promedio)</span>
-<span id="cb8-3"><a></a></span>
-<span id="cb8-4"><a></a><span class="co"># b </span></span>
-<span id="cb8-5"><a></a>pinguinos <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/palmer_penguins.csv"</span>)</span>
-<span id="cb8-6"><a></a></span>
-<span id="cb8-7"><a></a><span class="co"># c </span></span>
-<span id="cb8-8"><a></a><span class="fu">group_by</span>(species)</span>
-<span id="cb8-9"><a></a></span>
-<span id="cb8-10"><a></a><span class="co"># d</span></span>
-<span id="cb8-11"><a></a><span class="fu">summarise</span>(<span class="at">aleta_peso_ratio_promedio =</span> <span class="fu">mean</span>(aleta_peso_ratio, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb8-12"><a></a></span>
-<span id="cb8-13"><a></a><span class="co"># e</span></span>
-<span id="cb8-14"><a></a><span class="fu">mutate</span>(<span class="at">aleta_peso_ratio =</span> body_mass_g<span class="sc">/</span>flipper_length_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>pokemon <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pokemon.csv"</span>)</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>pokemon_extended <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pokemon_extended.csv"</span>)</span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a>pokemon <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a></a>  <span class="fu">inner_join</span>(pokemon_extended, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"NAME"</span> <span class="ot">=</span> <span class="st">"Name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+</div><div class="column medium" style="width:25%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/poke_join.jpg" class="quarto-figure quarto-figure-center" width="200"></p>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="desafio-rutas-metabolicas" class="title-slide slide level1 center">
+<h1>Desafio: Rutas metabolicas</h1>
+<div class="columns">
+<div class="column smaller" style="width:50%;">
+<p>Se realizó un experimento para ver cambios en la expresión de genes entre tres tratamientos sometidos a condiciones experimentales diferentes, cada condición con tres replicas.</p>
+<p>Como resultado del análisis de expresión diferencial de genes se obtuvieron dos bases de datos:</p>
+<ul>
+<li><code>RNAseq_GED_Deseq2_P0.05.txt</code> con la lista de genes expresados diferencial mente y su valor de abundancia (expresión) en cada uno de las replicas.</li>
+<li><code>RNAseq_enrich_kegg.txt</code> con los resultados de las principales rutas metabólicas enriquecidas y los genes que se encuentran en cada ruta.</li>
+</ul>
+<p>Importa ambas bases de datos y en una sola cadena gráfica los valores de expresión de cada replica de cada tratamiento de los genes que estén involucradas en cualquier proceso catabólico <code>catabolic process</code> tal como se muestra en la imagen.</p>
+</div><div class="column smaller" style="width:50%;">
 <div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># abrir lista de genes expresados diferencialmente</span></span>
+<span id="cb3-2"><a></a>ged <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="fu">here</span>(<span class="st">"data/RNAseq_GED_Deseq2_P0.05.txt"</span>))</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a>enrich <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="fu">here</span>(<span class="st">"data/RNAseq_enrich_kegg.txt"</span>))</span>
+<span id="cb3-5"><a></a></span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a>enrich <span class="sc">%&gt;%</span> </span>
+<span id="cb3-8"><a></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(Term, <span class="st">"catabolic"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a></a>  <span class="fu">separate_rows</span>(Genes, <span class="at">sep =</span> <span class="st">","</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-10"><a></a>  <span class="fu">select</span>(Genes, Term) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a></a>  <span class="fu">inner_join</span>(ged, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Genes"</span> <span class="ot">=</span> <span class="st">"gene"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-12"><a></a>  <span class="fu">select</span>(Genes, Term, <span class="fu">contains</span>(<span class="st">"_rep"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="sc">-</span>Genes, <span class="sc">-</span>Term), <span class="at">names_to =</span> <span class="st">"muestra"</span>, <span class="at">values_to =</span> <span class="st">"expresion"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-14"><a></a>  <span class="fu">separate</span>(muestra, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"condicion"</span>, <span class="st">"replica"</span>), <span class="at">sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-15"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Genes, <span class="at">y =</span> expresion, <span class="at">color =</span> condicion))<span class="sc">+</span></span>
+<span id="cb3-16"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.3</span>))<span class="sc">+</span></span>
+<span id="cb3-17"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Term, <span class="at">scales =</span> <span class="st">"free_x"</span>)<span class="sc">+</span></span>
+<span id="cb3-18"><a></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Expresión"</span>, <span class="at">color =</span> <span class="st">"Condición"</span>)<span class="sc">+</span></span>
+<span id="cb3-19"><a></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div class="countdown" id="timer_8dec7842" data-warn-when="10" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+<div>
+<figure>
+<p><img data-src="tidyr_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
 </div>
 </div>
 </div>
+</div></div>
 
 <div class="quarto-auto-generated-content">
 <p><img src="img/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p><a href="https://trippv.github.io/CursoTidyverse2023/">Análisis de datos con Tidyverse</a></p>
+<p><a href="https://trippv.github.io/CursoTidyverse2025/">Análisis de datos con Tidyverse</a></p>
 </div>
 </div>
 </section>

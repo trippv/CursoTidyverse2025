@@ -19,21 +19,19 @@ title-slide-attributes:
   data-background-opacity: "0.4"
 ---
 
-
-
 ## Objetivos de la sesión
 
-- Introducir la librería **patchwork** en R  
-- Aprender a combinar gráficos de **ggplot2**  
-- Explorar ejemplos prácticos para análisis de datos  
+-   Introducir la librería **patchwork** en R\
+-   Aprender a combinar gráficos de **ggplot2**\
+-   Explorar ejemplos prácticos para análisis de datos
 
----
+------------------------------------------------------------------------
 
 ## ¿Qué es patchwork?
 
-- Es un paquete de R creado por Thomas Lin Pedersen  
-- Permite **combinar múltiples gráficos** hechos con `ggplot2`  
-- Utiliza una sintaxis intuitiva con operadores `+`, `/` y `|`  
+-   Es un paquete de R creado por Thomas Lin Pedersen\
+-   Permite **combinar múltiples gráficos** hechos con `ggplot2`\
+-   Utiliza una sintaxis intuitiva con operadores `+`, `/` y `|`
 
 ```{r}
 library(tidyverse)
@@ -49,16 +47,14 @@ p4 <- ggplot(mtcars, aes(wt, mpg)) + geom_point(color = "purple") + theme_minima
 
 ```
 
-
-## Combinar gráficos con  "+"
+## Combinar gráficos con "+"
 
 ```{r}
 p1 + p2
 
 ```
 
-
-## Combinar gráficos con "|"
+## Combinar gráficos con "\|"
 
 ```{r}
 p1 | p2 | p3
@@ -77,4 +73,3 @@ p1 / p2 / p3
 ```{r}
 (p1 | p2) / (p3 | p4)
 ```
-

@@ -723,7 +723,7 @@ Un gráfico de líneas es una representación visual de datos que muestra la rel
 
 En ggplot `geom_line()` permite graficar líneas conectando puntos, donde el *aesthetics* `group` nos permite definir que observaciones estan conectadas.
 
-Para entender mejor esta geometría, utilizaremos el archivo `respiracion.csv`dentro de la carpeta `data` el cual contiene valores de consumo de oxígeno diario en un molusco marino bajo dos condiciones experimentales: **Control** y **Tratamiento**.
+Para entender mejor esta geometría, utilizaremos el archivo `respiracion_long.csv`dentro de la carpeta `data` el cual contiene valores de consumo de oxígeno diario en un molusco marino bajo dos condiciones experimentales: **Control** y **Tratamiento**.
 
 Por el momento, vamos a filtrar los datos para quedarnos con la experimento **Control**
 
@@ -800,12 +800,11 @@ ggplot(respiracion_control) +
 
 ```
 
-
 ## Visualización de series; geom_ribbon()
 
-Si quisieramos representar de forma resumida el ejercicio anterior, podriamos mostrar el valor promedio en línea solida y las barrar de error en cada día. Otra opción es mostrar las barrar de error con un área sombreada. Para esto, podemos utilizar la geometría `geom_ribbon()`. 
+Si quisieramos representar de forma resumida el ejercicio anterior, podriamos mostrar el valor promedio en línea solida y las barrar de error en cada día. Otra opción es mostrar las barrar de error con un área sombreada. Para esto, podemos utilizar la geometría `geom_ribbon()`.
 
-De manera similar a las barras de erorr `geom_ribbon()` requiere los argumentos `ymin` y `ymax` los cuales pueden ser los valores calculados de desviación estándar, intervalos de confianza, mínimo y máximo, etc. 
+De manera similar a las barras de erorr `geom_ribbon()` requiere los argumentos `ymin` y `ymax` los cuales pueden ser los valores calculados de desviación estándar, intervalos de confianza, mínimo y máximo, etc.
 
 ```{r}
 ggplot()+
@@ -818,6 +817,3 @@ ggplot()+
              color = "grey64",
              linetype = "dashed")
 ```
-
-
-

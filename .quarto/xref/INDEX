@@ -118,5 +118,8 @@
   },
   "slides/patchwork.qmd": {
     "patchwork.html": "d082d2af"
+  },
+  "slides/tidyr.qmd": {
+    "tidyr.html": "8a97dd6b"
   }
 }
