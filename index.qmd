@@ -36,7 +36,7 @@ Que el alumno adquiera habilidades prácticas para importar, explorar, transform
 | Jueves | 09:00 - 11:30 | [Visualización con ggplot2; Edición](https://trippv.github.io/CursoTidyverse2025/7_VisualizationGgplot2.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} | [{{< fa solid video >}}](https://www.mi-pagina.com){style="font-size:1.5rem; color:grey;"} |
 |  | 11:45 - 14:00 | [Combinar gráficos con Patchwork](https://trippv.github.io/CursoTidyverse2025/7_2_combinar.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/patchwork.html){style="font-size:1.5rem; color:grey;"} |  |
 |  |  | [ggplot sin código](https://trippv.github.io/CursoTidyverse2025/8_ggplotNoCode.html) |  |  |
-| Viernes | 09:00 - 11:30 | [Manipulacion de tablas](https://trippv.github.io/CursoTidyverse2025/9_Union.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |  |
+| Viernes | 09:00 - 11:30 | [Manipulacion de tablas](https://trippv.github.io/CursoTidyverse2025/9_Union.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/tidyr.html){style="font-size:1.5rem; color:grey;"} |  |
 |  | 11:45 - 14:00 | [Series de tiempo con Lubridate](https://trippv.github.io/CursoTidyverse2025/11_TimeSeries.html) | [{{< fa solid chalkboard-user >}}](https://trippv.github.io/CursoTidyverse2025/slides/ggplot_edicion.html){style="font-size:1.5rem; color:grey;"} |  |
 :::
 
