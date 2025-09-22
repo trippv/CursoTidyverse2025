@@ -25,7 +25,6 @@ De esta forma, los proyectos de RStudio resuelven el problema de las rutas 'frá
 
 El archivo de proyecto de RStudio es un archivo que se encuentra en el directorio raíz, con la extensión `.Rproj` ![](img/Rproj_logo.PNG){width="46"}. Cuando tu sesión de RStudio está siendo ejecutada a través del archivo de proyecto (.Rproj), el directorio de trabajo actual apunta a la carpeta raíz donde se guarda ese archivo `.Rproj`.
 
-
 Este proyecto facilita importar y exportar archivos ya que todos están *a la mano* a partir de rutas relativas a la carpeta raíz.
 
 ::: callout-tip
@@ -67,6 +66,39 @@ Para salir de un proyecto R, abre un nuevo proyecto o cierra el proyecto actual 
 
 Ahora prueba creando un proyecto dentro de una carpeta local en tu computadora y genera una estructura de carpetas como la indicada anteriormente
 :::
+
+::: callout-warning
+## Descarga de proyectos
+
+Ya probamos creando un proyecto. Ahora vamos a corroborar que la estructura de un proyecto se mantiene aunque cambiemos de computadora o de sistema operativo. Para esto, vamos a descargar un proyecto ya generado.
+
+Descarga el archivo `.zip` del siguiente enlace: [Proyecto de ejemplo](https://drive.google.com/file/d/1LOawIhDKydAsSshXc7QXQkG4ZXUVTe-z/view?usp=sharing)
+
+Descomprime el archivo y abre el proyecto `.Rproj` dentro de la carpeta descomprimida.
+:::
+
+Una vez que se haya descomprimido el archivo, abre el proyecto `.Rproj` dentro de la carpeta descomprimida. Deberías ver una estructura de folder como esta:
+
+![](img/Rproj_ejemplo_structura.PNG){fig-align="center" width="400"}
+
+
+
+
+
+Prueba generar un nuevo directorio llamado `output` utilizando la opción `New Folder` dentro del panel del lado inferior izuiqerdo. Guarda de nuevo el data frame dentro de esta nueva carpeta 
+
+
+```{r}
+#| echo: true
+#| eval: false
+
+write.table(df, 
+file = "output/tabla_output.txt", 
+sep = "\t", 
+row.names = FALSE)
+```
+
+
 
 ::: callout-tip
 ## Pro tip: uso de here() para rutas relativas

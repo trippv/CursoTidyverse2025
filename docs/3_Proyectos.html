@@ -335,6 +335,34 @@ Ejercicio
 <p>Ahora prueba creando un proyecto dentro de una carpeta local en tu computadora y genera una estructura de carpetas como la indicada anteriormente</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Descarga de proyectos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ya probamos creando un proyecto. Ahora vamos a corroborar que la estructura de un proyecto se mantiene aunque cambiemos de computadora o de sistema operativo. Para esto, vamos a descargar un proyecto ya generado.</p>
+<p>Descarga el archivo <code>.zip</code> del siguiente enlace: <a href="https://drive.google.com/file/d/1LOawIhDKydAsSshXc7QXQkG4ZXUVTe-z/view?usp=sharing">Proyecto de ejemplo</a></p>
+<p>Descomprime el archivo y abre el proyecto <code>.Rproj</code> dentro de la carpeta descomprimida.</p>
+</div>
+</div>
+<p>Una vez que se haya descomprimido el archivo, abre el proyecto <code>.Rproj</code> dentro de la carpeta descomprimida. Deberías ver una estructura de folder como esta:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/Rproj_ejemplo_structura.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img" width="400"></p>
+</figure>
+</div>
+<p>Prueba generar un nuevo directorio llamado <code>output</code> utilizando la opción <code>New Folder</code> dentro del panel del lado inferior izuiqerdo. Guarda de nuevo el data frame dentro de esta nueva carpeta</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(df, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">file =</span> <span class="st">"output/tabla_output.txt"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
