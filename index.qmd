@@ -18,7 +18,6 @@ Instructores: [Miguel A. Tripp Valdez](https://migueltrippcv.netlify.app/)
 Que el alumno adquiera habilidades prácticas para importar, explorar, transformar, limpiar y visualizar datos mediante herramientas del Tidyverse, fomentando buenas prácticas de análisis reproducible en R.
 :::
 
-
 ::: {.callout-warning icon="false"}
 ## Requisitos
 
@@ -26,7 +25,6 @@ Que el alumno adquiera habilidades prácticas para importar, explorar, transform
 
 -   Tener computadora personal y acceso a internet
 :::
-
 
 ## Temario del curso
 
@@ -65,3 +63,21 @@ Para curso necesitaremos tener instaladas las ultimas versiones de R y Rstudio. 
 Durante el curso estaremos trabajando desde un espacio en la nube. Puedes acceder en el siguiente enlace
 
 [https://posit.cloud/](https://posit.cloud/){target="_blank"}
+
+# Trabajando de manera local
+
+Si prefieres trabajar de manera local en tu propio equipo, puedes descargar el proyecto del curso con todas las bases de datos y ejercicios que usaremos en el curso. 
+
+[https://github.com/trippv/tidyverse2025.git](https://github.com/trippv/tidyverse2025.git)
+
+Para esto, puedes abrir un nuevo proyecto en Rstudio con control de cambios siguiendo estas instrucciones:
+
+  1. Abre RStudio
+  2. Ve a `File > New Project > Version Control > Git`
+  3. En el campo Repository URL, pega lo siguiente: 
+  `https://github.com/trippv/tidyverse2025.git`
+  4. Elige una carpeta local donde guardar el proyecto.
+  5. Haz clic en Create Project.
+
+
+Para verificar que todo funcione, desde Rstudio abre el archivo prueba.R y ejecútalo para desplegar el histograma
