@@ -1139,5 +1139,12 @@
     "title": "Análisis de datos con Tidyverse",
     "section": "Estructura de datos en R",
     "text": "Estructura de datos en R\ndata.frame\n\n\n\n# dataframe combinando número, texto y lógico\ndf &lt;- data.frame(\n  id = c(1,2,3,4,5),\n  nombre = c(\"Ana\", \"Juan\", \"María\", \"Pedro\", \"Lucía\"),\n  aprobado = c(TRUE, TRUE, FALSE, TRUE, FALSE)\n) \ndf\n\n  id nombre aprobado\n1  1    Ana     TRUE\n2  2   Juan     TRUE\n3  3  María    FALSE\n4  4  Pedro     TRUE\n5  5  Lucía    FALSE"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-formato-tidy",
+    "href": "slides/dplyr.html#el-formato-tidy",
+    "title": "dplyr",
+    "section": "El formato Tidy",
+    "text": "El formato Tidy\nTidy Data es un concepto fundamental dentro del ecosistema Tidyverse en R que se centra en la organización y manipulación eficiente de datos para análisis y visualización.\n\n\n\nCada variable debe tener su propia columna\nCada observación debe tener su propia fila\nCada valor debe tener su propia celda"
   }
 ]

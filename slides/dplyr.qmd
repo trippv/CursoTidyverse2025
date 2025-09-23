@@ -19,6 +19,33 @@ title-slide-attributes:
   data-background-opacity: "0.4"
 ---
 
+::: callout-objetivos
+### 🎓Objetivos
+
+Al final de esta lección serás capaz de:
+
+-   Filtrar y manipular valores de datos tabulares.
+-   Realizar operaciones agrupadas.
+-   Manejar pipes para unir cadena de operaciones en un data.frame.
+-   Filtrar y manipular datos faltantes (`NA`).
+:::
+
+## El formato Tidy
+
+Tidy Data es un concepto fundamental dentro del ecosistema Tidyverse en R que se centra en la organización y manipulación eficiente de datos para análisis y visualización.
+
+::::: coluumns
+::: {.column .medium width="50%"}
+1.  Cada variable debe tener su **propia columna**
+2.  Cada observación debe tener su **propia fila**
+3.  Cada valor debe tener su **propia celda**
+:::
+
+::: {.column width="50%"}
+![](img/tidydata.png){fig-align="center"}
+:::
+:::::
+
 ## Dplyr
 
 Paquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:
